@@ -1,6 +1,6 @@
-package SoftLock.Repositories;
+package softLock.repositories;
 
-import SoftLock.Entities.User;
+import softLock.entities.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

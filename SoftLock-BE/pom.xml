@@ -11,7 +11,7 @@
 	<groupId>com.darpio.SoftLock</groupId>
 	<artifactId>SoftLock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SoftLock</name>
+	<name>softLock</name>
 	<description>Capstone project for Epicode </description>
 	<properties>
 		<java.version>17</java.version>

@@ -1,8 +1,8 @@
-package SoftLock.Services;
+package softLock.services;
 
-import SoftLock.Entities.User;
-import SoftLock.Exceptions.ByIdNotFoundException;
-import SoftLock.Repositories.UserRepository;
+import softLock.entities.users.User;
+import softLock.exceptions.ByIdNotFoundException;
+import softLock.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

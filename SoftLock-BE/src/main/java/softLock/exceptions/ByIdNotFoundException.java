@@ -1,4 +1,4 @@
-package SoftLock.Exceptions;
+package softLock.exceptions;
 
 public class ByIdNotFoundException extends Throwable {
     public ByIdNotFoundException(String entity, Long id) {

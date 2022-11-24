@@ -1,8 +1,8 @@
-package SoftLock.Services;
+package softLock.services;
 
-import SoftLock.Entities.Role;
-import SoftLock.Exceptions.ByIdNotFoundException;
-import SoftLock.Repositories.RoleRepository;
+import softLock.entities.users.Role;
+import softLock.exceptions.ByIdNotFoundException;
+import softLock.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package SoftLock.Entities;
+package softLock.entities.users;
 
 public enum RoleType {
 
