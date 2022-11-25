@@ -1,4 +1,4 @@
-package softLock.repositories;
+package softLock.repositories.users;
 
 import softLock.entities.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;

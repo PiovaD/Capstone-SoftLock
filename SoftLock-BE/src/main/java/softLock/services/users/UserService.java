@@ -1,8 +1,8 @@
-package softLock.services;
+package softLock.services.users;
 
 import softLock.entities.users.User;
 import softLock.exceptions.ByIdNotFoundException;
-import softLock.repositories.UserRepository;
+import softLock.repositories.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    UserRepository repo;
+    UserRepository rep;
 
     @Autowired
     PasswordEncoder encoder;
@@ -25,28 +25,28 @@ public class UserService {
      */
     public User save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+        return rep.save(user);
     }
 
     /**
      * Get All Users, return an iterable of Users
      */
     public Iterable<User> getAllUsers() {
-        return repo.findAll();
+        return rep.findAll();
     }
 
     /**
      * Get All Users, return a pageable of users for lighter payloads
      */
     public Page<User> getAllUsersPageable(Pageable p) {
-        return repo.findAll(p);
+        return rep.findAll(p);
     }
 
     /**
      * Find by id, if id is non-existent throws an exception
      */
     public User findById(Long id) throws ByIdNotFoundException {
-        Optional<User> found = repo.findById(id);
+        Optional<User> found = rep.findById(id);
         if (found.isPresent()) {
             return found.get();
         }
@@ -57,7 +57,7 @@ public class UserService {
      * update User
      */
     public User updateUser(User updatedUser) throws ByIdNotFoundException {
-        repo.save(updatedUser);
+        rep.save(updatedUser);
         return updatedUser;
     }
 
@@ -65,7 +65,7 @@ public class UserService {
      * throws IllegalArgumentException
      */
     public String deleteUser(Long id) {
-        repo.deleteById(id);
+        rep.deleteById(id);
         return "User delete successfully";
     }
 }
