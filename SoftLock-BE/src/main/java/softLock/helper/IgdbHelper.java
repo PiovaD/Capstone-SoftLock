@@ -62,7 +62,7 @@ public class IgdbHelper {
         JSONArray res = jsonResponse.getBody().getArray();
 
         for (int i = 0; i < res.length(); i++) {
-            System.out.println(saveGame(res.getJSONObject(i)));
+            saveGame(res.getJSONObject(i));
         }
 
     }
@@ -74,22 +74,33 @@ public class IgdbHelper {
      * @return the saved game
      */
     public Game saveGame(JSONObject game) {
-        if (gameService.findByIgdbId(game.getLong("id")) == null) {
-            Game newGame = new Game();
-            newGame.setIgdbID(game.getLong("id"));
-            newGame.setName(game.getString("name"));
-            newGame.setSlug(game.getString("slug"));
-            newGame.setSummary(game.getString("summary"));
-            newGame.setReleaseDate(Instant.ofEpochSecond(game.getLong("first_release_date")).atZone(ZoneId.systemDefault()).toLocalDate());
-            newGame.setImageID(getImg(newGame.getIgdbID(), "game", "covers"));
+        if (gameService.findByIgdbID(game.getLong("id")) == null) {
+            return gameService.save(converterGame(game));
 
-            newGame.setPlatforms(savePlatform(game.getJSONArray("platforms")));
-            newGame.setGenres(saveGenre(game.getJSONArray("genres")));
-
-            return gameService.save(newGame);
         } else {
-            return gameService.findByIgdbId(game.getLong("id"));
+            return gameService.findByIgdbID(game.getLong("id"));
         }
+    }
+
+    /**
+     * Convert Json Obj to Game obj
+     *
+     * @param game Json obj
+     * @return the converted game
+     */
+    public Game converterGame(JSONObject game) {
+        Game newGame = new Game();
+        newGame.setIgdbID(game.getLong("id"));
+        newGame.setName(game.getString("name"));
+        newGame.setSlug(game.has("slug") ? game.getString("slug") : null);
+        newGame.setSummary(game.has("summary") ? game.getString("summary") : null);
+        newGame.setReleaseDate(game.has("first_release_date") ? Instant.ofEpochSecond(game.getLong("first_release_date")).atZone(ZoneId.systemDefault()).toLocalDate() : null);
+        newGame.setImageID(getImg(newGame.getIgdbID(), "game", "covers"));
+
+        newGame.setPlatforms(game.has("platforms") ? savePlatform(game.getJSONArray("platforms")) : null);
+        newGame.setGenres(game.has("genres") ? saveGenre(game.getJSONArray("genres")) : null);
+
+        return newGame;
     }
 
     /**
@@ -194,6 +205,6 @@ public class IgdbHelper {
                 )
                 .asJson();
 
-        return jsonResponse.getBody().getArray().getJSONObject(0).getString("image_id");
+        return jsonResponse.getBody().getArray().length() > 0 ? jsonResponse.getBody().getArray().getJSONObject(0).getString("image_id") : null;
     }
 }

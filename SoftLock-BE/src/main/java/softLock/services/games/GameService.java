@@ -50,16 +50,33 @@ public class GameService {
     }
 
     /**
+     * Find by igdb-id, if id is non-existent throws an exception
+     */
+    public Game findByIgdbID(long igdbId){
+        Optional<Game> found = rep.findByIgdbID(igdbId);
+        return found.orElse(null);
+    }
+
+    /**
      * Find by name, if name is non-existent throws an exception
      */
     public Game findByName(String name) throws ByNameNotFoundException {
-        Optional<Game> found = rep.findByName(name);
+        Optional<Game> found = rep.findByNameAllIgnoreCase(name);
         if (found.isPresent()) {
             return found.get();
         }
         throw new ByNameNotFoundException("Game", name);
     }
 
+    public Game findBySlug(String slug) throws ByNameNotFoundException {
+        Optional<Game> found = rep.findBySlugIgnoreCase(slug);
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new ByNameNotFoundException("Game", slug);
+    }
+
+    //TODO verificare utilità update
     /**
      * update Game
      */
@@ -68,17 +85,4 @@ public class GameService {
         return updatedGame;
     }
 
-    /**
-     * throws IllegalArgumentException
-     */
-    public String deleteGames(Long id) {
-        rep.deleteById(id);
-        return "Games delete successfully";
-    }
-
-
-    public Game findByIgdbId(long igdbId) {
-        Optional<Game> found = rep.findByIgdbID(igdbId);
-        return found.orElse(null);
-    }
 }
