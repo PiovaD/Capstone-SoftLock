@@ -26,8 +26,8 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    private String nome;
-    private String cognome;
+    private String name;
+    private String lastName;
 
     private Boolean active = true;
 
@@ -39,11 +39,11 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String email, String nome, String cognome, String password) {
+    public User(String username, String email, String name, String lastName, String password) {
         this.username = username;
         this.email = email;
-        this.nome = nome;
-        this.cognome = cognome;
+        this.name = name;
+        this.lastName = lastName;
         this.password = password;
     }
 

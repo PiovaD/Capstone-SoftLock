@@ -1,7 +1,11 @@
 package softLock.services.users;
 
+import softLock.entities.users.Role;
+import softLock.entities.users.RoleType;
 import softLock.entities.users.User;
 import softLock.exceptions.ByIdNotFoundException;
+import softLock.exceptions.ByNameNotFoundException;
+import softLock.exceptions.ByRoleFoundException;
 import softLock.repositories.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +22,9 @@ public class UserService {
     UserRepository rep;
 
     @Autowired
+    RoleService roleService;
+
+    @Autowired
     PasswordEncoder encoder;
 
     /**
@@ -25,6 +32,7 @@ public class UserService {
      */
     public User save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
+        user.addRole(roleService.getByRole(RoleType.ROLE_USER));
         return rep.save(user);
     }
 
@@ -54,18 +62,71 @@ public class UserService {
     }
 
     /**
+     * Find by username, if username is non-existent throws an exception
+     */
+    public User findByUsername(String username) throws ByNameNotFoundException {
+        Optional<User> found = rep.findByUsernameAllIgnoreCase(username);
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new ByNameNotFoundException("User", username);
+    }
+
+    /**
      * update User
      */
-    public User updateUser(User updatedUser) throws ByIdNotFoundException {
-        rep.save(updatedUser);
-        return updatedUser;
+    public User update(User updatedUser) throws ByIdNotFoundException {
+        User oldUser = findById(updatedUser.getId());
+
+        oldUser.setName(updatedUser.getName());
+        oldUser.setLastName(updatedUser.getLastName());
+        oldUser.setUsername(updatedUser.getUsername());
+        oldUser.setEmail(updatedUser.getEmail());
+
+        return rep.save(oldUser);
+    }
+
+    public User updatePassword(User user) throws ByIdNotFoundException {
+        User oldUser = findById(user.getId());
+
+        oldUser.setPassword(encoder.encode(user.getPassword()));
+
+        return rep.save(oldUser);
+    }
+
+    public User addRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {
+        User oldUser = findById(user.getId());
+
+        Role role = roleService.getByRole(roleType);
+
+        if (role != null){
+            oldUser.addRole(role);
+        }else{
+            throw new ByRoleFoundException("Role", roleType);
+        }
+
+        return rep.save(oldUser);
+    }
+
+    public User removeRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {
+        User oldUser = findById(user.getId());
+
+        Role role = roleService.getByRole(roleType);
+
+        if (role != null){
+            oldUser.removeRole(role);
+        }else{
+            throw new ByRoleFoundException("Role", roleType);
+        }
+
+        return rep.save(oldUser);
     }
 
     /**
      * throws IllegalArgumentException
      */
-    public String deleteUser(Long id) {
-        rep.deleteById(id);
+    public String deleteUser(User user) {
+        rep.deleteById(user.getId());
         return "User delete successfully";
     }
 }
