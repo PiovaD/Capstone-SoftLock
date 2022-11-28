@@ -1,4 +1,4 @@
-package softLock.Configuration;
+package softLock.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class SetupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.warn("START SETUP RUNNER");
-        //igdbHelper.gamesFiller();
-        //createData();
+        // igdbHelper.gamesFiller();
+        // createData();
         log.warn("END SETUP RUNNER");
     }
 

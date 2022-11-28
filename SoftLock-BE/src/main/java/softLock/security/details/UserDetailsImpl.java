@@ -1,4 +1,4 @@
-package softLock.Security.details;
+package softLock.security.details;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

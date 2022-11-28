@@ -1,11 +1,11 @@
-package softLock.Security;
+package softLock.security;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import softLock.Security.details.UserDetailsImpl;
+import softLock.security.details.UserDetailsImpl;
 
 import java.util.Date;
 

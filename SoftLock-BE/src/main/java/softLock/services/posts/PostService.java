@@ -51,7 +51,7 @@ public class PostService {
     /**
      * update Post
      */
-    public Post updatePlatform(Post updatedPost) throws ByIdNotFoundException {
+    public Post updatePlatform(Post updatedPost){
         rep.save(updatedPost);
         return updatedPost;
     }

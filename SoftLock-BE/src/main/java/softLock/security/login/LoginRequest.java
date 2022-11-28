@@ -1,4 +1,4 @@
-package softLock.Security.login;
+package softLock.security.login;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -192,7 +192,7 @@ public class IgdbHelper {
      *
      * @param id    the id to search for
      * @param where the parameter to search corresponding to the id
-     * @param url   the url of the external api "https://api.igdb.com/v4/" + url
+     * @param url   the url of the external api <a href="https://api.igdb.com/v4/">https://api.igdb.com/v4/</a> + url
      * @return the image id
      */
     public String getImg(Long id, String where, String url) {

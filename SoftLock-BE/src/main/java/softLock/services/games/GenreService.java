@@ -61,14 +61,6 @@ public class GenreService {
     }
 
     /**
-     * update Genre
-     */
-    public Genre updateGenre(Genre updatedGenre) throws ByIdNotFoundException {
-        rep.save(updatedGenre);
-        return updatedGenre;
-    }
-
-    /**
      * throws IllegalArgumentException
      */
     public String deleteGenre(Long id) {

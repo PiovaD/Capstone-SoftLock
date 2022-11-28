@@ -5,7 +5,6 @@ import softLock.entities.games.Game;
 import softLock.entities.users.User;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

@@ -1,4 +1,4 @@
-package softLock.Configuration;
+package softLock.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

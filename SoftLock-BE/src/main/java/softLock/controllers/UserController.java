@@ -15,8 +15,6 @@ import softLock.exceptions.ByNameNotFoundException;
 import softLock.exceptions.ByRoleFoundException;
 import softLock.services.users.UserService;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/api/users")

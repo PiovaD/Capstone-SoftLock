@@ -9,10 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import softLock.Security.JwtUtils;
-import softLock.Security.details.UserDetailsImpl;
-import softLock.Security.login.LoginRequest;
-import softLock.Security.login.LoginResponse;
+import softLock.security.JwtUtils;
+import softLock.security.details.UserDetailsImpl;
+import softLock.security.login.LoginRequest;
+import softLock.security.login.LoginResponse;
 import softLock.services.users.UserService;
 
 import java.util.List;

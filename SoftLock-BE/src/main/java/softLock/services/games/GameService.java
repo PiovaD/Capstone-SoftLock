@@ -80,7 +80,7 @@ public class GameService {
     /**
      * update Game
      */
-    public Game updateGames(Game updatedGame) throws ByIdNotFoundException {
+    public Game updateGames(Game updatedGame){
         rep.save(updatedGame);
         return updatedGame;
     }

@@ -66,14 +66,6 @@ public class PlatformService {
     }
 
     /**
-     * update Platform
-     */
-    public Platform updatePlatform(Platform updatedPlatform) throws ByIdNotFoundException {
-        rep.save(updatedPlatform);
-        return updatedPlatform;
-    }
-
-    /**
      * throws IllegalArgumentException
      */
     public String deletePlatform(Long id) {
