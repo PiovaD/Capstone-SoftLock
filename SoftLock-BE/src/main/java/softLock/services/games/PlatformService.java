@@ -3,6 +3,7 @@ package softLock.services.games;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import softLock.entities.games.Platform;
 import softLock.exceptions.ByIdNotFoundException;
@@ -49,7 +50,7 @@ public class PlatformService {
         throw new ByIdNotFoundException("Platform", id);
     }
 
-    public Platform findByIgdbId(Long igdbId)  {
+    public Platform findByIgdbID(Long igdbId)  {
         Optional<Platform> found = rep.findByIgdbID(igdbId);
         return found.orElse(null);
     }
@@ -58,19 +59,31 @@ public class PlatformService {
      * Find by name, if name is non-existent throws an exception
      */
     public Platform findByName(String name) throws ByNameNotFoundException {
-        Optional<Platform> found = rep.findByName(name);
+        Optional<Platform> found = rep.findByNameAllIgnoreCase(name);
         if (found.isPresent()) {
             return found.get();
         }
         throw new ByNameNotFoundException("Platform", name);
     }
 
-    /**
-     * throws IllegalArgumentException
-     */
-    public String deletePlatform(Long id) {
-        rep.deleteById(id);
-        return "Platform delete successfully";
+    public Platform findBySlug(String slug) throws ByNameNotFoundException {
+        Optional<Platform> found = rep.findBySlugIgnoreCase(slug);
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new ByNameNotFoundException("Game", slug);
+    }
+
+    public Platform findByAbbreviation(String abbreviation) throws ByNameNotFoundException {
+        Optional<Platform> found = rep.findByAbbreviationIgnoreCase(abbreviation);
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new ByNameNotFoundException("Game", abbreviation);
+    }
+
+    public Iterable<Platform> searchPlatforms(@Nullable String name, @Nullable String slug, @Nullable String abbreviation, @Nullable Long igdbID) {
+        return rep.findByNameOrSlugOrAbbreviationOrIgdbID(name,slug,abbreviation,igdbID);
     }
 
 }

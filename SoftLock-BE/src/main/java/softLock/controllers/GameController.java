@@ -129,6 +129,14 @@ public class GameController {
         return new ResponseEntity<>(gameList, HttpStatus.OK);
     }
 
+    @GetMapping("/find")
+    public ResponseEntity<Iterable<Game>> searchGenres(
+            @RequestParam(name = "genresName",required = false) String genresName,
+            @RequestParam(name = "platformsAbb", required = false) String platformsAbb
+    ) {
+        return new ResponseEntity<>(serv.searchByGenreOrPlatform(genresName, platformsAbb), HttpStatus.OK);
+    }
+
     /*---------------------ADDING BY EXTERNAL API---------------------*/
 
     @PostMapping("/add/{igdb-id}")

@@ -3,6 +3,7 @@ package softLock.services.games;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import softLock.entities.games.Genre;
 import softLock.exceptions.ByIdNotFoundException;
@@ -41,7 +42,7 @@ public class GenreService {
     /**
      * Find by id, if id is non-existent throws an exception
      */
-    public Genre findById(Long id) throws ByIdNotFoundException {
+    public Genre findByID(Long id) throws ByIdNotFoundException {
         Optional<Genre> found = rep.findById(id);
         if (found.isPresent()) {
             return found.get();
@@ -53,23 +54,29 @@ public class GenreService {
      * Find by name, if name is non-existent throws an exception
      */
     public Genre findByName(String name) throws ByNameNotFoundException {
-        Optional<Genre> found = rep.findByName(name);
+        Optional<Genre> found = rep.findByNameAllIgnoreCase(name);
         if (found.isPresent()) {
             return found.get();
         }
         throw new ByNameNotFoundException("Genre", name);
     }
 
-    /**
-     * throws IllegalArgumentException
-     */
-    public String deleteGenre(Long id) {
-        rep.deleteById(id);
-        return "Genre delete successfully";
-    }
 
-    public Genre findByIgdbId(long igdbId) {
+    public Genre findByIgdbID(long igdbId) {
         Optional<Genre> found = rep.findByIgdbID(igdbId);
         return found.orElse(null);
+    }
+
+    public Genre findBySlug(String slug) throws ByNameNotFoundException {
+        Optional<Genre> found = rep.findBySlugIgnoreCase(slug);
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new ByNameNotFoundException("Game", slug);
+    }
+
+    public Iterable<Genre> searchGenres(@Nullable String name, @Nullable String slug, @Nullable Long igdbID) {
+            return rep.findByNameOrSlugOrIgdbID(name,slug,igdbID);
+
     }
 }

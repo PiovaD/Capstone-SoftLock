@@ -3,6 +3,7 @@ package softLock.services.games;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import softLock.entities.games.Game;
 import softLock.exceptions.ByIdNotFoundException;
@@ -74,6 +75,10 @@ public class GameService {
             return found.get();
         }
         throw new ByNameNotFoundException("Game", slug);
+    }
+
+    public Iterable<Game> searchByGenreOrPlatform(@Nullable String genresName, @Nullable String platformsAbb){
+        return rep.findByGenreOrPlatform(genresName, platformsAbb);
     }
 
     //TODO verificare utilità update

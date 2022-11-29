@@ -112,7 +112,7 @@ public class IgdbHelper {
     public Set<Platform> savePlatform(JSONArray platforms) {
         Set<Platform> res = new HashSet<>();
         for (int i = 0; i < platforms.length(); i++) {
-            Platform p = platformService.findByIgdbId(platforms.getLong(i));
+            Platform p = platformService.findByIgdbID(platforms.getLong(i));
             if (p == null) {
                 res.add(newPlatform(platforms.getLong(i)));
             } else {
@@ -131,7 +131,7 @@ public class IgdbHelper {
     public Set<Genre> saveGenre(JSONArray genres) {
         Set<Genre> res = new HashSet<>();
         for (int i = 0; i < genres.length(); i++) {
-            Genre g = genreService.findByIgdbId(genres.getLong(i));
+            Genre g = genreService.findByIgdbID(genres.getLong(i));
             if (g == null) {
                 res.add(newGenre(genres.getLong(i)));
             } else {
