@@ -6,6 +6,7 @@ import lombok.Setter;
 import softLock.entities.games.Game;
 import softLock.entities.users.User;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -13,10 +14,13 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 public class Review extends Post {
+
     private int vote;
 
-    public Review(User user, Game game, String text, int vote) {
-        super(user, game, text);
-        this.vote = vote;
+    public Review(User user, Game game, String title, String text, int vote) {
+        super(user, game, title, text);
+
+        this.vote = Math.min(Math.max(vote,0), 10);
+
     }
 }
