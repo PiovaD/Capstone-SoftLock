@@ -43,9 +43,6 @@ public class Post {
     @Column(columnDefinition="TEXT")
     private String text;
 
-
-
-    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "posts_up_vote",
             joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -53,7 +50,6 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> upVote = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "posts_down_vote",
             joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
