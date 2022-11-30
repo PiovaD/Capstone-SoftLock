@@ -1,6 +1,7 @@
 package softLock.entities.posts;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import softLock.entities.games.Game;
@@ -40,23 +41,21 @@ public class Post {
     private String title;
     private String titleSlug;
 
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String text;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "posts_up_vote",
             joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<User> upVote = new HashSet<>();
+    private Set<User> upVote = new java.util.LinkedHashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "posts_down_vote",
             joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> downVote = new java.util.LinkedHashSet<>();
 
     public Post(User user, Game game, String title, String text) {
@@ -64,23 +63,23 @@ public class Post {
         this.user = user;
         this.game = game;
         this.title = title;
-        this.titleSlug = title != null ? title.toLowerCase().replaceAll("\\s", "-"): null;
+        this.titleSlug = title != null ? title.toLowerCase().replaceAll("\\s", "-") : null;
         this.text = text;
     }
 
-    public void addUpVote(User user){
+    public void addUpVote(User user) {
         this.upVote.add(user);
     }
 
-    public void addDownVote(User user){
+    public void addDownVote(User user) {
         this.downVote.add(user);
     }
 
-    public void removeUpVote(User user){
+    public void removeUpVote(User user) {
         this.upVote.remove(user);
     }
 
-    public void removeDownVote(User user){
+    public void removeDownVote(User user) {
         this.downVote.remove(user);
     }
 

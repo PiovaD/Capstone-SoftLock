@@ -106,6 +106,21 @@ public class UserController {
         }
     }
 
+    @PutMapping("/update-profile-pic")
+    public ResponseEntity<User> updateProfilePic(@RequestBody User user) {
+        try {
+            return new ResponseEntity<>(serv.updateProfilePic(user), HttpStatus.OK);
+
+        } catch (ByIdNotFoundException e) {
+            log.error("Error updating user: " + e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PutMapping("/add-role/{rt}")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN')")
     public ResponseEntity<User> updateAddRole(@PathVariable RoleType rt, @RequestBody User user) {
@@ -144,7 +159,10 @@ public class UserController {
     public ResponseEntity<String> delete(@RequestBody User user) {
         try {
             return new ResponseEntity<>(serv.deleteUser(user), HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+        } catch (ByIdNotFoundException e) {
+            log.error("Error deleting user (id could be null): " + e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
             log.error("Error deleting user (id could be null): " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

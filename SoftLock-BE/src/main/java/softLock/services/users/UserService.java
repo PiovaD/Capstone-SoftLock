@@ -94,6 +94,14 @@ public class UserService {
         return rep.save(oldUser);
     }
 
+    public User updateProfilePic(User user) throws ByIdNotFoundException {
+        User oldUser = findById(user.getId());
+
+        oldUser.setProfilePicUrl(user.getProfilePicUrl());
+
+        return rep.save(oldUser);
+    }
+
     public User addRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {
         User oldUser = findById(user.getId());
 
@@ -125,9 +133,17 @@ public class UserService {
     /**
      * throws IllegalArgumentException
      */
-    public String deleteUser(User user) {
-        rep.deleteById(user.getId());
-        return "User delete successfully";
+    public String deleteUser(User user) throws ByIdNotFoundException {
+        User u = findById(user.getId());
+        u.setProfilePicUrl(null);
+        u.setEmail(null);
+        u.setActive(false);
+        u.setRoles(null);
+        u.setName("User Deleted");
+        u.setLastName("");
+
+        rep.save(u);
+        return "User soft deleted";
     }
 }
 
