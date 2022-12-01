@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import softLock.entities.posts.Answer;
 import softLock.entities.posts.Post;
@@ -216,6 +217,7 @@ public class PostController {
     }
 
     @PostMapping("/new-review")
+    @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'GAMER', 'PRESS', 'INFLUENCER' )")
     public ResponseEntity<Review> createNewReview(@RequestBody Review post) {
         try {
             return new ResponseEntity<>(reviewService.save(post), HttpStatus.OK);
@@ -258,6 +260,7 @@ public class PostController {
     }
 
     @PutMapping("/update-review")
+    @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'GAMER', 'PRESS', 'INFLUENCER' )")
     public ResponseEntity<Review> updateReview(@RequestBody Review updatedReview) {
         try {
             return new ResponseEntity<>(reviewService.update(updatedReview), HttpStatus.OK);

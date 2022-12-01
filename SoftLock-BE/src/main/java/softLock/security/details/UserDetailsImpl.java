@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
 
 	/**
-	 * 
+	 *
 	 */
 	@Serial
 	private static final long serialVersionUID = 1L;
@@ -28,6 +28,8 @@ public class UserDetailsImpl implements UserDetails {
 	@JsonIgnore
 	private String password;
 
+	private String profilePicUrl;
+
 	private boolean accountNonLocked = true;
 	private boolean accountNonExpired = false;
 	private boolean credentialsNonExpired = true;
@@ -37,11 +39,12 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String password, boolean enabled,
+	public UserDetailsImpl(Long id, String username, String password, String profilePicUrl , boolean enabled,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.id = id;
 		this.username = username;
+		this.profilePicUrl = profilePicUrl;
 		this.password = password;
 		this.accountNonLocked = enabled;
 		this.accountNonExpired = enabled;
@@ -56,7 +59,7 @@ public class UserDetailsImpl implements UserDetails {
 				.map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
 				.collect(Collectors.toList());
 
-		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(),
+		return new UserDetailsImpl(user.getId(), user.getUsername(),  user.getPassword(), user.getProfilePicUrl(),
 				user.getActive(), authorities);
 	}
 
