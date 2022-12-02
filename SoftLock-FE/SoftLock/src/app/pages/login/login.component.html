@@ -1,34 +1,37 @@
-<div class="surface-overlay p-4 mx-auto md:w-9 lg:w-6">
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-    <h3 class="text-900 text-2xl font-medium">Login</h3>
+<div class="surface-border mx-auto border-round surface-section p-3 md:w-9 lg:w-6">
+  <div class="surface-card p-5 shadow-2 border-round flex-auto">
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <h3 class="text-900 text-2xl font-medium">Login</h3>
 
-    <p-messages></p-messages>
+      <p-messages></p-messages>
 
-    <span class="p-float-label my-5 field w-full">
-      <input inputId="login-username" formControlName="username" type="text" name="username" pInputText class="w-full">
-      <label for="login-username">Username</label>
-    </span>
+      <span class="p-float-label my-5 field w-full">
+        <input inputId="login-username" formControlName="username" type="text" name="username" pInputText
+          class="w-full">
+        <label for="login-username">Username</label>
+      </span>
 
-    <span class="p-float-label field mb-5">
-      <p-password inputId="login-password" formControlName="password" type="password" inputStyleClass="w-full"
-        styleClass="w-full" [toggleMask]="true" [showClear]="true" [feedback]="false">
-      </p-password>
+      <span class="p-float-label field mb-5">
+        <p-password inputId="login-password" formControlName="password" inputStyleClass="w-full"
+          styleClass="w-full" [toggleMask]="true" [showClear]="true" [feedback]="false">
+        </p-password>
 
-      <label for="login-password">Password</label>
-    </span>
+        <label for="login-password">Password</label>
+      </span>
 
-    <div class="flex align-items-center justify-content-between mb-6">
-      <div class="flex align-items-center field-checkbox">
-        <p-checkbox inputId="rememberme" formControlName="remember" [binary]="true" styleClass="mr-2"></p-checkbox>
-        <label for="rememberme">Remember me</label>
+      <div class="flex align-items-center justify-content-between mb-6">
+        <div class="flex align-items-center field-checkbox">
+          <p-checkbox inputId="rememberme" formControlName="remember" [binary]="true" styleClass="mr-2"></p-checkbox>
+          <label for="rememberme">Remember me</label>
+        </div>
       </div>
-    </div>
 
-    <button pButton pRipple label="Login" icon="pi pi-user" class="w-full" [loading]="isLoading"></button>
+      <button pButton pRipple label="Login" icon="pi pi-user" class="w-full" [loading]="isLoading"></button>
 
-    <div class="mt-6 text-center text-600">
-      Don't have an account? <a tabindex="0" class="font-medium text-blue-500" [routerLink]="'/registration'">Sign
-        up</a>
-    </div>
-  </form>
+      <div class="mt-6 text-center text-600">
+        Don't have an account? <a tabindex="0" class="font-medium text-blue-500" [routerLink]="'/registration'">Sign
+          up</a>
+      </div>
+    </form>
+  </div>
 </div>

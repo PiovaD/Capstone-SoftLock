@@ -54,7 +54,7 @@ public class AuthController {
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
 
-            return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getProfilePicUrl(),
+            return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.getProfilePicUrl(),
                     roles, userDetails.getExpirationTime()));
 
         } catch (DisabledException | LockedException e) {

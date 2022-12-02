@@ -7,7 +7,7 @@ export interface IUser {
   username: string;
   email: string;
   password?: string;
-  profilePic: string | null;
+  profilePicUrl: string | null;
   role: { id: number, roleType: RoleType }[];
 }
 

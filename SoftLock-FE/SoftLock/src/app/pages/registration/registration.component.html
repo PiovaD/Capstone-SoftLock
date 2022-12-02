@@ -1,42 +1,29 @@
-<p>registration works!</p>
-<!-- <div class="surface-overlay p-4 mx-auto md:w-9 lg:w-6">
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-    <h3 class="text-900 text-2xl font-medium mb-6">Login</h3>
+<div class="surface-border mx-auto border-round surface-section p-3 lg:w-6">
 
-    <span class="p-float-label mb-5 field w-full">
-      <input inputId="login-username" formControlName="username" type="text" name="username" pInputText class="w-full">
-      <label for="login-username">Username</label>
-    </span>
+  <div class="surface-card p-5 shadow-2 border-round flex-auto">
+    <div class="text-900 font-semibold text-lg mt-3">Profile</div>
 
-    <span class="p-float-label field mb-5">
-      <p-password inputId="login-password" formControlName="password" type="password" inputStyleClass="w-full" styleClass="w-full" [toggleMask]="true"
-        [showClear]="true">
-        <ng-template pTemplate="footer">
-          <p-divider></p-divider>
-          <p class="mt-2">Suggestions</p>
-          <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-            <li>At least one lowercase character</li>
-            <li>At least one uppercase character</li>
-            <li>At least one numeric</li>
-            <li>Minimum 5 characters</li>
-          </ul>
-        </ng-template>
-      </p-password>
+    <p-messages></p-messages>
 
-      <label for="login-password">Password</label>
-    </span>
+    <p-divider></p-divider>
 
-    <div class="flex align-items-center justify-content-between mb-6">
-      <div class="flex align-items-center field-checkbox">
-        <p-checkbox inputId="rememberme" formControlName="remember" [binary]="true" styleClass="mr-2"></p-checkbox>
-        <label for="rememberme">Remember me</label>
+    <form class="flex gap-5 flex-column-reverse md:flex-row" >
+
+      <div class="flex-auto p-fluid">
+
+        <app-user-form [userForm]="registerForm"></app-user-form>
+
+        <app-password-form [passwordForm]="registerForm"></app-password-form>
+
+        <div class="flex justify-content-between  flex-wrap">
+          <button pButton pRipple label="Register Profile" class="w-auto mb-3" (click)="submitForm()" [loading]="isLoading" [disabled]="!registerForm.valid"></button>
+
+          <button pButton pRipple label="Reset" class="w-auto mb-3" (click)="resetForm()" ></button>
+        </div>
       </div>
-    </div>
 
-    <button pButton pRipple label="Login" icon="pi pi-user" class="w-full" [loading]="isLoading" ></button>
+      <app-avatar-form [avatarForm]="registerForm"></app-avatar-form>
 
-    <div class="mt-6 text-center text-600">
-      Don't have an account? <a tabindex="0" class="font-medium text-blue-500" [routerLink]="'/register'">Sign up</a>
-    </div>
-  </form>
-</div> -->
+    </form>
+  </div>
+</div>

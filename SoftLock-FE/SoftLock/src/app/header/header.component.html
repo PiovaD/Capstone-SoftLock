@@ -56,8 +56,8 @@
           class="cursor-pointer flex p-3 align-items-center hover:bg-grey-600 transition-colors transition-duration-150 relative select-none"
           pStyleClass="@next" enterClass="hidden" enterActiveClass="scalein" leaveToClass="hidden"
           leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
-          <p-avatar *ngIf="isLogged && user?.profilePic != null" [image]="user?.profilePic || '' " styleClass="mr-2" size="large" shape="circle"></p-avatar>
-          <p-avatar *ngIf="!isLogged || user?.profilePic == null" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+          <p-avatar *ngIf="isLogged && user?.profilePicUrl != null" [image]="user?.profilePicUrl || '' " styleClass="mr-2" size="large" shape="circle"></p-avatar>
+          <p-avatar *ngIf="!isLogged || user?.profilePicUrl == null" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
 
           <div class="block lg:hidden">
             <div class="text-gray-100 hover:text-white font-medium">{{getUserName()}}</div>

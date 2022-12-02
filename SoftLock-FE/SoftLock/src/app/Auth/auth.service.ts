@@ -2,14 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
+import { AuthRes } from '../Models/auth-res';
 import { IUser } from '../Models/iuser';
 
-type AuthRes = {
-  accessToken: string;
-  id: number;
-  username: string;
-  profilePicUrl: string | null;
-};
 
 @Injectable({
   providedIn: 'root',

@@ -10,6 +10,8 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from "primeng/divider";
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {DialogModule} from 'primeng/dialog';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 
 
@@ -17,7 +19,6 @@ import {MessageModule} from 'primeng/message';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
   ],
   exports: [
     FormsModule,
@@ -29,7 +30,9 @@ import {MessageModule} from 'primeng/message';
     PasswordModule,
     DividerModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    DialogModule,
+    RadioButtonModule
   ]
 })
 export class FormSharedModule { }

@@ -16,51 +16,53 @@ import java.util.stream.Collectors;
 @Data
 public class UserDetailsImpl implements UserDetails {
 
-	/**
-	 *
-	 */
-	@Serial
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-	private Long id;
+    private Long id;
 
-	private String username;
-	@JsonIgnore
-	private String password;
+    private String username;
 
-	private String profilePicUrl;
+    private String email;
+    @JsonIgnore
+    private String password;
 
-	private boolean accountNonLocked = true;
-	private boolean accountNonExpired = false;
-	private boolean credentialsNonExpired = true;
-	private boolean enabled = true;
+    private String profilePicUrl;
 
-	private Date ExpirationTime;
+    private boolean accountNonLocked = true;
+    private boolean accountNonExpired = false;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
 
-	private Collection<? extends GrantedAuthority> authorities;
+    private Date ExpirationTime;
 
-	public UserDetailsImpl(Long id, String username, String password, String profilePicUrl , boolean enabled,
-			Collection<? extends GrantedAuthority> authorities) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.profilePicUrl = profilePicUrl;
-		this.password = password;
-		this.accountNonLocked = enabled;
-		this.accountNonExpired = enabled;
-		this.credentialsNonExpired = enabled;
-		this.enabled = enabled;
-		this.authorities = authorities;
-	}
+    private Collection<? extends GrantedAuthority> authorities;
 
-	public static UserDetailsImpl build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles()
-				.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
-				.collect(Collectors.toList());
+    public UserDetailsImpl(Long id, String username, String email, String password, String profilePicUrl, boolean enabled, Collection<? extends GrantedAuthority> authorities) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.profilePicUrl = profilePicUrl;
+        this.password = password;
+        this.accountNonLocked = enabled;
+        this.accountNonExpired = enabled;
+        this.credentialsNonExpired = enabled;
+        this.enabled = enabled;
+        this.authorities = authorities;
+    }
 
-		return new UserDetailsImpl(user.getId(), user.getUsername(),  user.getPassword(), user.getProfilePicUrl(),
-				user.getActive(), authorities);
-	}
+    public static UserDetailsImpl build(User user) {
+        List<GrantedAuthority> authorities = user.getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
+                .collect(Collectors.toList());
+
+        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getProfilePicUrl(),
+                user.getActive(), authorities);
+    }
 
 }

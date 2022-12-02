@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../Auth/auth.service';
+import { AuthRes } from '../Models/auth-res';
 import { IUser } from '../Models/iuser';
 
 @Component({
@@ -12,7 +13,7 @@ import { IUser } from '../Models/iuser';
 export class HeaderComponent implements OnInit {
 
   isLogged: boolean = false;
-  user?: IUser;
+  user?: AuthRes | null;
 
   constructor(private primengConfig: PrimeNGConfig, private authService: AuthService, private router: Router) { }
 
@@ -20,13 +21,16 @@ export class HeaderComponent implements OnInit {
     this.primengConfig.ripple = true
 
     this.getUserName()
+
+
   }
 
   getUserName(): string {
-    let user = this.authService.getLoggedUser();
-    if (user) {
+    this.user = this.authService.getLoggedUser();
+
+    if (this.user) {
       this.isLogged = true;
-      return user.username;
+      return this.user.username;
     } else {
       this.isLogged = false;
       return 'Profile';
