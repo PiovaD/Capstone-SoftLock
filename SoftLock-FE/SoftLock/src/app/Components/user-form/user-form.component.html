@@ -12,7 +12,7 @@
   <span class="p-float-label my-5 field p-input-icon-right">
     <i *ngIf="!userForm.controls['username'].invalid && !userForm.controls['username'].valid && userForm.controls['username'].value != '' &&  userForm.controls['username'].dirty "
       class="pi pi-spin pi-spinner"></i>
-    <input id="username" formControlName="username" type="text" pInputText>
+    <input id="username" formControlName="username" type="text" pInputText pTooltip="no white space" tooltipPosition="top" tooltipEvent="focus">
     <label for="username">
       {{userForm.controls['username'].valid || !userForm.controls['username'].dirty ? "Username": "Invalid username or already in use" }}
     </label>

@@ -17,15 +17,15 @@ export class UserService {
   }
 
   getAllUsersPaginate(page: number, size: number): Observable<IUser> {
-    return this.http.get<IUser>(API + 'users/id', { params: { "page": page, "size": size } }); //TODO: Verifica se funziona altrimetni fallo normale
+    return this.http.get<IUser>(API + 'users/pageable', { params: { "page": page, "size": size } });
   }
 
   getUserById(id: number | string): Observable<IUser> {
-    return this.http.get<IUser>(API + 'users/id', { params: { "id": id } }); //TODO: Verifica se funziona altrimetni fallo normale
+    return this.http.get<IUser>(API + 'users/id', { params: { "id": id } });
   }
 
   getUserByUsername(username: string): Observable<IUser> {
-    return this.http.get<IUser>(API + 'users/id', { params: { "username": username } }); //TODO: Verifica se funziona altrimetni fallo normale
+    return this.http.get<IUser>(API + 'users/username', { params: { "username": username } });
   }
 
   updateUser(user: IUser): Observable<IUser> {

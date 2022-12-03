@@ -1,0 +1,53 @@
+<div class="surface-border mx-auto border-round surface-section p-3 lg:w-8">
+
+  <section id="user-info"
+    class="grid gap-5 justify-content-center sm:justify-content-start text-center align-items-center m-3">
+
+    <div id="user-info-avatar">
+
+      <div *ngIf="user?.profilePicUrl == null"
+        class="flex align-items-center justify-content-center pi pi-user h-10rem w-10rem border-circle surface-100 shadow-6"
+        style="font-size: 6rem">
+        <i shape="circle" class=""></i>
+      </div>
+
+      <img *ngIf="user?.profilePicUrl != null" [src]="user?.profilePicUrl"
+        class="h-10rem w-10rem border-circle surface-100 shadow-6" />
+
+    </div>
+
+    <div id="user-info-data" class="flex flex-column gap-4 text-xl">
+
+      <h3 id="user-info-username" class="m-0">{{user?.username}}</h3>
+
+      <p-button label="Edit profile" icon="pi pi-pencil" styleClass="p-button-info" iconPos="right"></p-button>
+
+    </div>
+
+    <div class="flex gap-5 justify-content-center  align-items-center flex-wrap text-sm lg:ml-5">
+
+      <div class="mt-3">
+        <i class="pi pi-comments mr-2 text-yellow-400"></i>
+        <span class="font-medium text-500">POST</span>
+        <div class="text-700 mt-2">0{{posts?.length}}</div>
+      </div>
+
+      <div class="mt-3">
+        <i class="pi pi-arrow-circle-up mr-2 text-green-400"></i>
+        <span class="font-medium text-500">UP-VOTE</span>
+        <div class="text-700 mt-2">77{{upVote?.length}}</div>
+      </div>
+
+      <div class="mt-3">
+        <i class="pi pi-arrow-circle-down mr-2 text-red-400"></i>
+        <span class="font-medium text-500">DOWN-VOTE</span>
+        <div class="text-700 mt-2">0{{downVote?.length}}</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <p-divider></p-divider>
+
+</div>

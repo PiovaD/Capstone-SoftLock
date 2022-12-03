@@ -12,6 +12,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {TooltipModule} from 'primeng/tooltip'
 
 
 
@@ -32,7 +33,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MessagesModule,
     MessageModule,
     DialogModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TooltipModule
   ]
 })
 export class FormSharedModule { }

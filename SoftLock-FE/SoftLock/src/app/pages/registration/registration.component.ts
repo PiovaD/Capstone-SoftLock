@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(3)]],
       username: [
         null,
-        [Validators.required, Validators.minLength(3)],
+        [Validators.required, Validators.pattern('[\\S]{3,}$')],
         this.validationService.usernameValidator,
       ],
       email: [
