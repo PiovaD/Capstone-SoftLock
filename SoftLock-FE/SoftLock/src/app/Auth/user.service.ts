@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
@@ -45,11 +45,17 @@ export class UserService {
   }
 
   removeRole(user: IUser, role: RoleType): Observable<IUser> {
-    return this.http.delete<IUser>(API + 'users/remove-role/'+ role, { body: { user } }); //TODO: Verifica se funziona altrimetni fallo con l'id
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: user
+    };
+    return this.http.delete<IUser>(API + 'users/remove-role/' + role, httpOptions);
   }
 
   deleteUser(user: IUser): Observable<IUser> {
-    return this.http.delete<IUser>(API + 'users/delete', { body: { user } }); //TODO: Verifica se funziona altrimetni fallo con l'id
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: user
+    };
+    return this.http.delete<IUser>(API + 'users/delete', httpOptions);
   }
 
 }

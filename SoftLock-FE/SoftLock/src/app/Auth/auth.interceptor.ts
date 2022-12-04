@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authSvc: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = this.authSvc.getLoggedUser()?.accessToken
+    let token = this.authSvc.getLoggedUser()?.token
 
     if(token){
 

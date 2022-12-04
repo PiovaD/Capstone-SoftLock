@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private validationService: ValidatorService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -47,19 +47,23 @@ export class RegistrationComponent implements OnInit {
 
   submitForm(): void {
     this.isLoading = true;
-    delete this.registerForm.value.confirm
     this.authService.register(this.registerForm.value)
-    .subscribe({
-      complete: () => this.router.navigate(['/login']),
-      error: (err) => {
-        console.error('httpError', err);
-        this.isLoading = false;
-        err.status == 0?
-        this.messageService.add({severity:'error', summary:'Error', detail:'Server error'})
-        :
-        this.messageService.add({severity:'error', summary:'Error', detail:'Registration failed check the data'});
-      },
-    });
+      .subscribe({
+        complete: () => this.router.navigate(['/login']),
+        error: (err) => {
+          console.error('httpError', err);
+          this.isLoading = false;
+          err.status == 0 ?
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
+            :
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Registration failed check the data' });
+
+          setTimeout(
+            () => {
+              this.messageService.clear()
+            }, 3000);
+        }
+      });
   }
 
   resetForm(): void {

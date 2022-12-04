@@ -33,11 +33,11 @@ export class HeaderComponent implements OnInit {
       return this.user.username;
     } else {
       this.isLogged = false;
-      return 'Profile';
+      return 'MyProfile';
     }
   }
 
-  logout(){
+  logout(): void {
     this.authService.removeAccess();
     this.router.navigate(['/']);
   }

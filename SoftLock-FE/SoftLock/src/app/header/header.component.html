@@ -1,7 +1,9 @@
 <div class="surface-overlay shadow-2 flex relative lg:static z-5" style="min-height: 80px">
 
-  <div class="flex align-items-center justify-content-center px-5 bg-gray-800" [routerLink]="'/'">
-    <img src="https://i.pravatar.cc/150?img=1" alt="Image" height="40">
+  <div class="flex flex-column md:flex-row align-items-center justify-content-center p-2 surface-overlay"
+    [routerLink]="'/'">
+    <img src="../../assets/img/logo.PNG" alt="Image" height="70" class="mr-2">
+    <img src="../../assets/img/SoftLock.png" alt="Image" class="mt-2 md:mt-0 w-7rem md:w-8rem xl:w-10rem hidden sm:inline">
   </div>
 
 
@@ -57,10 +59,12 @@
           pStyleClass="@next" enterClass="hidden" enterActiveClass="scalein" leaveToClass="hidden"
           leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
 
-          <p-avatar *ngIf="isLogged && user?.profilePicUrl != null" [image]="user?.profilePicUrl || '' " styleClass="mr-2" size="large" shape="circle"></p-avatar>
-          <p-avatar *ngIf="!isLogged || user?.profilePicUrl == null" icon="pi pi-user" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+          <p-avatar *ngIf="isLogged && user?.profilePicUrl != null" [image]="user?.profilePicUrl || '' "
+            styleClass="mr-2" size="large" shape="circle"></p-avatar>
+          <p-avatar *ngIf="!isLogged || user?.profilePicUrl == null" icon="pi pi-user" styleClass="mr-2" size="large"
+            shape="circle"></p-avatar>
 
-          <div class="block lg:hidden">
+          <div class="block">
             <div class="text-gray-100 hover:text-white font-medium">{{getUserName()}}</div>
           </div>
 

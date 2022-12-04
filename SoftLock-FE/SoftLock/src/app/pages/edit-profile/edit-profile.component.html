@@ -1,0 +1,46 @@
+<div class="surface-border mx-auto border-round surface-section p-3 lg:w-6 shadow-8">
+
+  <div class="surface-card p-5 shadow-2 border-round flex-auto">
+
+    <h3 class="text-900 font-semibold text-lg mt-3 text-2xl">Edit profile </h3>
+
+    <p-messages></p-messages>
+
+    <p-divider></p-divider>
+
+    <form class="flex gap-5 flex-column-reverse md:flex-row">
+
+      <div class="flex-auto p-fluid">
+
+        <app-user-form [userForm]="updateForm"></app-user-form>
+
+        <div class="flex justify-content-between flex-wrap">
+          <button pButton pRipple label="Update Profile" class="w-auto mb-3" (click)="submitForm()"
+            [loading]="isLoading" [disabled]="!updateForm.valid || !updateForm.dirty"></button>
+
+          <button pButton pRipple label="Reset" class="w-auto mb-3" (click)="resetForm()"></button>
+
+        </div>
+      </div>
+
+      <div>
+
+        <app-avatar-form [avatarForm]="updateForm"></app-avatar-form>
+
+        <div class="flex flex-column mt-5">
+
+          <button pButton pRipple label="Change password" class="w-auto mb-3 p-button-warning p-button-outlined"
+            (click)="updatePassword()"></button>
+
+          <button *ngIf="isDev()" pButton pRipple label="Delete profile" class="w-auto mb-3 p-button-danger p-button-outlined"
+            (click)="deleteUser()"></button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

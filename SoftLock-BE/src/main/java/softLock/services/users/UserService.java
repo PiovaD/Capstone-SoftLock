@@ -83,6 +83,8 @@ public class UserService {
         oldUser.setUsername(updatedUser.getUsername());
         oldUser.setEmail(updatedUser.getEmail());
 
+        oldUser.setProfilePicUrl(updatedUser.getProfilePicUrl());
+
         return rep.save(oldUser);
     }
 
@@ -133,7 +135,8 @@ public class UserService {
     /**
      * throws IllegalArgumentException
      */
-    public String deleteUser(User user) throws ByIdNotFoundException {
+    public void deleteUser(User user) throws ByIdNotFoundException {
+
         User u = findById(user.getId());
         u.setProfilePicUrl(null);
         u.setEmail(null);
@@ -143,7 +146,6 @@ public class UserService {
         u.setLastName("");
 
         rep.save(u);
-        return "User soft deleted";
     }
 }
 

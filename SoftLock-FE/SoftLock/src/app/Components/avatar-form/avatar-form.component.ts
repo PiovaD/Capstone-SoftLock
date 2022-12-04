@@ -64,11 +64,13 @@ export class AvatarFormComponent implements OnInit {
 
   avatarSelect(gender: string | null, avatar: string) {
     this.displayModal = false;
+    this.avatarForm.controls["profilePicUrl"].markAsDirty();
     this.avatarForm.controls["profilePicUrl"].setValue('https://joeschmoe.io/api/v1/' + gender + '/' + avatar);
   }
 
   reset() {
     this.displayModal = false;
+    this.avatarForm.controls["profilePicUrl"].markAsDirty();
     this.avatarForm.controls["profilePicUrl"].setValue(null);
   }
 

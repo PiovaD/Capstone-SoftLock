@@ -1,4 +1,4 @@
-<div class="surface-border mx-auto border-round surface-section p-3 lg:w-8">
+<div class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
 
   <section id="user-info"
     class="grid gap-5 justify-content-center sm:justify-content-start text-center align-items-center m-3">
@@ -20,7 +20,7 @@
 
       <h3 id="user-info-username" class="m-0">{{user?.username}}</h3>
 
-      <p-button label="Edit profile" icon="pi pi-pencil" styleClass="p-button-info" iconPos="right"></p-button>
+      <a pButton *ngIf="user?.username == loggedUser?.username" label="Edit profile" icon="pi pi-pencil" class="p-button-info no-underline" iconPos="right" [routerLink]="'/profile-edit'"></a>
 
     </div>
 

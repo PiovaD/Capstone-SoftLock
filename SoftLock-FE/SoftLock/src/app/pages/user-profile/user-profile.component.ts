@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Auth/auth.service';
 import { UserService } from 'src/app/Auth/user.service';
+import { AuthRes } from 'src/app/Models/auth-res';
 import { IUser } from 'src/app/Models/iuser';
 
 @Component({
@@ -11,6 +13,7 @@ import { IUser } from 'src/app/Models/iuser';
 export class UserProfileComponent implements OnInit { //TODO fetch  post up vote e down vote
 
   user?: IUser;
+  loggedUser?: AuthRes;
 
   posts?: any[];
 
@@ -18,9 +21,11 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
 
   downVote?: any[];
 
-  constructor(private userServ: UserService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private authServ: AuthService , private userServ: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+
+    this.loggedUser = this.authServ.getLoggedUser() || undefined;
 
     this.route.params.subscribe(res => {
       this.userServ.getUserByUsername(res['username'])

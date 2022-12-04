@@ -23,6 +23,16 @@ import { UserFormComponent } from 'src/app/Components/user-form/user-form.compon
     RegistrationRoutingModule,
     FormSharedModule,
     AvatarModule
+  ],
+  exports: [
+    UserFormComponent,
+    AvatarFormComponent,
+    PasswordFormComponent,
+
+    RegistrationRoutingModule,
+    FormSharedModule,
+    AvatarModule
+
   ]
 })
 export class RegistrationModule { }
