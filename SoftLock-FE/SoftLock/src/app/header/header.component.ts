@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../Auth/auth.service';
-import { AuthRes } from '../Models/auth-res';
-import { IUser } from '../Models/iuser';
+import { UserAuthRes } from '../Models/users/auth-res';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +12,7 @@ import { IUser } from '../Models/iuser';
 export class HeaderComponent implements OnInit {
 
   isLogged: boolean = false;
-  user?: AuthRes | null;
+  user?: UserAuthRes | null;
 
   constructor(private primengConfig: PrimeNGConfig, private authService: AuthService, private router: Router) { }
 

@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
-import { IUser } from '../Models/iuser';
-import { RoleType } from '../Models/role-type';
+import { IUser } from '../Models/users/iuser';
+import { RoleType } from '../Models/users/role-type';
 
 @Injectable({
   providedIn: 'root'

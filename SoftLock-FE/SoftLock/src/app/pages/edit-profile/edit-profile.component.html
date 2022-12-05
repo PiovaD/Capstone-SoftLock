@@ -8,6 +8,9 @@
 
     <p-divider></p-divider>
 
+    <p-confirmDialog styleClass="w-11 sm:w-9 md:w-6" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
+
     <form class="flex gap-5 flex-column-reverse md:flex-row">
 
       <div class="flex-auto p-fluid">
@@ -30,10 +33,22 @@
         <div class="flex flex-column mt-5">
 
           <button pButton pRipple label="Change password" class="w-auto mb-3 p-button-warning p-button-outlined"
-            (click)="updatePassword()"></button>
+            (click)="display = true"></button>
 
-          <button *ngIf="isDev()" pButton pRipple label="Delete profile" class="w-auto mb-3 p-button-danger p-button-outlined"
-            (click)="deleteUser()"></button>
+          <p-dialog header="Update Password" [(visible)]="display" [modal]="true">
+
+            <p>Insert a new password</p>
+
+            <app-password-form [passwordForm]="passwordForm"></app-password-form>
+
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Update password" class="w-auto mb-3" (click)="submitPassword()"
+                [loading]="isLoading" [disabled]="!passwordForm.valid || !passwordForm.dirty"></button>
+            </ng-template>
+          </p-dialog>
+
+          <button *ngIf="isDev()" pButton pRipple label="Delete profile"
+            class="w-auto mb-3 p-button-danger p-button-outlined" (click)="deleteUser()"></button>
 
         </div>
 

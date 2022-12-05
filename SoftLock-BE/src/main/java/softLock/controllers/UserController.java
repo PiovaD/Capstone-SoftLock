@@ -162,7 +162,7 @@ public class UserController {
         } catch (ByIdNotFoundException e) {
             log.error("Error deleting user (id could be null): " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error deleting user (id could be null): " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -59,10 +59,10 @@ public class ReviewService {
     }
 
     private Review findById(Long id) throws ByIdNotFoundException {
-           Optional<Review> res = rep.findById(id);
-           if (res.isPresent()) {
-               return res.get();
-           }
+        Optional<Review> res = rep.findById(id);
+        if (res.isPresent()) {
+            return res.get();
+        }
         throw new ByIdNotFoundException("Review", id);
     }
 

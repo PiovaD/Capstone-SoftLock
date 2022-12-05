@@ -109,9 +109,9 @@ public class UserService {
 
         Role role = roleService.getByRole(roleType);
 
-        if (role != null){
+        if (role != null) {
             oldUser.addRole(role);
-        }else{
+        } else {
             throw new ByRoleFoundException("Role", roleType);
         }
 
@@ -123,9 +123,9 @@ public class UserService {
 
         Role role = roleService.getByRole(roleType);
 
-        if (role != null){
+        if (role != null) {
             oldUser.removeRole(role);
-        }else{
+        } else {
             throw new ByRoleFoundException("Role", roleType);
         }
 
@@ -135,7 +135,7 @@ public class UserService {
     /**
      * throws IllegalArgumentException
      */
-    public void deleteUser(User user) throws ByIdNotFoundException {
+    public String deleteUser(User user) throws ByIdNotFoundException {
 
         User u = findById(user.getId());
         u.setProfilePicUrl(null);
@@ -146,6 +146,8 @@ public class UserService {
         u.setLastName("");
 
         rep.save(u);
+
+        return "";
     }
 }
 

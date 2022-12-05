@@ -45,11 +45,9 @@ public class RoleService {
         }
     }
 
-    public String delete(Long id) {
+    public void delete(Long id) {
 
         rep.deleteById(id);
-
-        return "Role deleted successfully.";
 
     }
 

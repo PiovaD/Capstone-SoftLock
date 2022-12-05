@@ -50,7 +50,7 @@ public class PlatformService {
         throw new ByIdNotFoundException("Platform", id);
     }
 
-    public Platform findByIgdbID(Long igdbId)  {
+    public Platform findByIgdbID(Long igdbId) {
         Optional<Platform> found = rep.findByIgdbID(igdbId);
         return found.orElse(null);
     }
@@ -83,7 +83,7 @@ public class PlatformService {
     }
 
     public Iterable<Platform> searchPlatforms(@Nullable String name, @Nullable String slug, @Nullable String abbreviation, @Nullable Long igdbID) {
-        return rep.findByNameOrSlugOrAbbreviationOrIgdbID(name,slug,abbreviation,igdbID);
+        return rep.findByNameOrSlugOrAbbreviationOrIgdbID(name, slug, abbreviation, igdbID);
     }
 
 }

@@ -2,29 +2,33 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/Auth/auth.service';
 import { UserService } from 'src/app/Auth/user.service';
-import { AuthRes } from 'src/app/Models/auth-res';
-import { IUser } from 'src/app/Models/iuser';
-import { RoleType } from 'src/app/Models/role-type';
+import { UserAuthRes } from 'src/app/Models/users/auth-res';
+import { IUser } from 'src/app/Models/users/iuser';
 import { ValidatorService } from 'src/app/Models/validator.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class EditProfileComponent implements OnInit {
 
-  loggedUser!: AuthRes | null;
+  loggedUser!: UserAuthRes | null;
   user!: IUser;
 
   updateForm!: FormGroup;
+  passwordForm!: FormGroup;
+
   isLoading: boolean = false;
+  display: boolean = false;
+
 
   constructor(
+    private confirmationService: ConfirmationService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
@@ -40,11 +44,14 @@ export class EditProfileComponent implements OnInit {
 
     this.createForm()
 
+    this.createPasswordForm()
+
     if (this.loggedUser != null) {
 
       this.userService.getUserByUsername(this.loggedUser.username)
         .subscribe({
           next: (res) => this.user = res,
+
           complete: () => {
 
             this.updateForm.setValue({
@@ -54,6 +61,12 @@ export class EditProfileComponent implements OnInit {
               username: this.user.username,
               email: this.user.email,
               profilePicUrl: this.user.profilePicUrl
+            })
+
+            this.passwordForm.setValue({
+              id: this.user.id,
+              password: null,
+              confirm: null
             })
 
           },
@@ -79,21 +92,25 @@ export class EditProfileComponent implements OnInit {
         [Validators.email, Validators.required],
         this.validationService.emailValidator,
       ],
+
       profilePicUrl: [null]
+    });
+  }
+
+  createPasswordForm(): void {
+    this.passwordForm = this.formBuilder.group({
+      id: null,
+      password: [null, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[\\S]{5,}$')]],
+      confirm: [null, [this.confirmValidator]]
     });
   }
 
   submitForm(): void {
 
-    console.log("USER " + this.user.profilePicUrl)
-    console.log("FORM " + this.updateForm.value.profilePicUrl)
-
     this.userService.updateUser(this.updateForm.value)
       .subscribe({
         next: (res) => {
           let currStore = JSON.parse(String(localStorage.getItem('access') || String(sessionStorage.getItem('access'))))
-
-          console.log(currStore)
 
           currStore.email = res.email;
           currStore.username = res.username;
@@ -103,11 +120,15 @@ export class EditProfileComponent implements OnInit {
 
           this.user = res;
 
-          console.log(this.user)
+          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'User updated' })
 
         },
         complete: () => {
-          this.location.back();
+          setTimeout(
+            () => {
+              this.location.back();
+            }, 1000);
+
         },
 
         error: (err) => {
@@ -138,10 +159,11 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  confirmValidator = (
-    control: FormControl
-  ): { [s: string]: boolean } | null => {
-    if (control.value && control.value != this.updateForm.value.password) {
+  confirmValidator = (control: FormControl) : { [s: string]: boolean } | null => {
+
+    if (control.value && control.value != this.passwordForm.controls['password'].value) {
+
+          console.info(control.value + " " + this.passwordForm.controls['password'].value)
       return { error: true };
     }
     return null;
@@ -149,27 +171,56 @@ export class EditProfileComponent implements OnInit {
 
   deleteUser(): void {
 
-    this.userService.deleteUser(this.user)
-      .subscribe({
-        complete: () => {
-          this.authService.removeAccess()
-          this.router.navigate(['/'])
-        },
+    this.confirmationService.confirm({
+      message: 'Do you want to delete the account?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.userService.deleteUser(this.user)
+          .subscribe({
+            next: () => {
+              this.authService.removeAccess()
+              this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'User deleted' });
+            },
 
-        error: (err) => {
-          console.error('httpError', err);
-          this.isLoading = false;
-          err.status == 0 ?
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
-            :
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Delete failed' });
+            complete: () => {
+              setTimeout(
+                () => {
+                  this.router.navigate(['/'])
+                }, 1000);
+            },
 
-          setTimeout(
-            () => {
-              this.messageService.clear()
-            }, 3000);
+            error: (err) => {
+              console.error('httpError', err);
+              this.isLoading = false;
+              err.status == 0 ?
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
+                :
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Delete failed' });
+
+              setTimeout(
+                () => {
+                  this.messageService.clear()
+                }, 3000);
+            }
+          })
+      },
+      reject: (type: ConfirmEventType) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+            break;
         }
-      })
+
+        setTimeout(
+          () => {
+            this.messageService.clear()
+          }, 3000);
+      }
+    });
+
+
+
 
   }
 
@@ -177,8 +228,33 @@ export class EditProfileComponent implements OnInit {
     return !(this.loggedUser?.roles.includes("ROLE_DEV"));
   }
 
-  updatePassword(): void {
-    //todo: update
+  submitPassword():void{
+  this.userService.updateUserPassword(this.passwordForm.value)
+    .subscribe({
+
+      next: () => this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Password updated' }),
+
+      complete: () => {
+        setTimeout(
+          () => {
+        this.location.back();
+          }, 1000);
+      },
+
+      error: (err) => {
+        console.error('httpError', err);
+        this.isLoading = false;
+        err.status == 0 ?
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
+          :
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Update failed check the data' });
+
+        setTimeout(
+          () => {
+            this.messageService.clear()
+          }, 3000);
+      }
+    })
   }
 
 }

@@ -76,7 +76,7 @@ public class GenreService {
     }
 
     public Iterable<Genre> searchGenres(@Nullable String name, @Nullable String slug, @Nullable Long igdbID) {
-            return rep.findByNameOrSlugOrIgdbID(name,slug,igdbID);
+        return rep.findByNameOrSlugOrIgdbID(name, slug, igdbID);
 
     }
 }

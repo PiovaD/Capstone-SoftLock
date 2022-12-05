@@ -123,7 +123,7 @@ public class PostService {
      */
     public String deletePost(Post post) throws IllegalArgumentException {
         rep.deleteById(post.getId());
-        return "Post delete successfully";
+        return "";
     }
 
 }

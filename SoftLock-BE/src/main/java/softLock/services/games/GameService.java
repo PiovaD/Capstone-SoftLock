@@ -53,7 +53,7 @@ public class GameService {
     /**
      * Find by igdb-id, if id is non-existent throws an exception
      */
-    public Game findByIgdbID(long igdbId){
+    public Game findByIgdbID(long igdbId) {
         Optional<Game> found = rep.findByIgdbID(igdbId);
         return found.orElse(null);
     }
@@ -77,15 +77,16 @@ public class GameService {
         throw new ByNameNotFoundException("Game", slug);
     }
 
-    public Iterable<Game> searchByGenreOrPlatform(@Nullable String genresName, @Nullable String platformsAbb){
+    public Iterable<Game> searchByGenreOrPlatform(@Nullable String genresName, @Nullable String platformsAbb) {
         return rep.findByGenreOrPlatform(genresName, platformsAbb);
     }
 
     //TODO verificare utilità update
+
     /**
      * update Game
      */
-    public Game updateGames(Game updatedGame){
+    public Game updateGames(Game updatedGame) {
         rep.save(updatedGame);
         return updatedGame;
     }

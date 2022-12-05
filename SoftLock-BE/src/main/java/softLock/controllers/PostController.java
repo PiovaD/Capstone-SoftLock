@@ -278,7 +278,7 @@ public class PostController {
     @PutMapping("/up-vote/add/{post-id}/{user-id}")
     public ResponseEntity<Post> addUpVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
-            return new ResponseEntity<>(postService.addUpVote(postID,userID), HttpStatus.OK);
+            return new ResponseEntity<>(postService.addUpVote(postID, userID), HttpStatus.OK);
 
         } catch (ByIdNotFoundException e) {
             log.error("Error updating post: " + e.getMessage());
@@ -293,7 +293,7 @@ public class PostController {
     @PutMapping("/down-vote/add/{post-id}/{user-id}")
     public ResponseEntity<Post> addDownVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
-            return new ResponseEntity<>(postService.addDownVote(postID,userID), HttpStatus.OK);
+            return new ResponseEntity<>(postService.addDownVote(postID, userID), HttpStatus.OK);
 
         } catch (ByIdNotFoundException e) {
             log.error("Error updating post: " + e.getMessage());
@@ -311,7 +311,7 @@ public class PostController {
     @DeleteMapping("/vote/remove/{post-id}/{user-id}")
     public ResponseEntity<Post> removeUpVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
-            return new ResponseEntity<>(postService.removeVote(postID,userID), HttpStatus.OK);
+            return new ResponseEntity<>(postService.removeVote(postID, userID), HttpStatus.OK);
 
         } catch (ByIdNotFoundException e) {
             log.error("Error updating post: " + e.getMessage());
@@ -322,7 +322,6 @@ public class PostController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
-
 
 
     @DeleteMapping("/delete")
