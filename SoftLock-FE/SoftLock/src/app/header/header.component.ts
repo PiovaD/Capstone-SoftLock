@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
-import { AuthService } from '../Auth/auth.service';
+import { AuthService } from '../Services/auth.service';
 import { UserAuthRes } from '../Models/users/auth-res';
 
 @Component({

@@ -14,14 +14,20 @@ import {AvatarModule} from 'primeng/avatar';
 import {InputTextModule} from 'primeng/inputtext';
 import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './Auth/auth.interceptor';
+import { AuthInterceptor } from './Services/auth.interceptor';
+import { GameCarouselComponent } from './Components/game-carousel/game-carousel.component';
+import {CarouselModule} from 'primeng/carousel';
+import {CardModule} from 'primeng/card';
+import {DividerModule} from 'primeng/divider'
+import {SkeletonModule} from 'primeng/skeleton';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    GameCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,12 @@ import { AuthInterceptor } from './Auth/auth.interceptor';
     MenubarModule,
     StyleClassModule,
     AvatarModule,
-    InputTextModule
+    InputTextModule,
+    CarouselModule,
+    CardModule,
+    DividerModule,
+    SkeletonModule
+
   ],
   providers: [
     {

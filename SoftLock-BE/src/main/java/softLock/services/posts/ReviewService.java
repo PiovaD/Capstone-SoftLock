@@ -66,6 +66,10 @@ public class ReviewService {
         throw new ByIdNotFoundException("Review", id);
     }
 
+    public Iterable<Integer> getReviewsByGameId(Long gameId) {
+        return rep.getReviewsByGameId(gameId);
+    }
+
     public Iterable<Review> findByUserId(Long userId) {
         return rep.findByUserId(userId);
     }

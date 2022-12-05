@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { AuthService } from '../Auth/auth.service';
-import { UserService } from '../Auth/user.service';
+import { AuthService } from '../Services/auth.service';
+import { UserService } from '../Services/user.service';
 import { IUser } from './users/iuser';
 
 @Injectable({

@@ -1,0 +1,38 @@
+<div *ngIf="game" class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
+
+  <div class="flex flex-column sm:flex-row">
+    <img [id]="game.slug" [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+game.imageID+'.png'"
+      [alt]="game.slug" class="max-h-22rem max-w-17rem">
+
+    <div class="ml-5">
+      <h3 class="text-4xl mb-2">{{game.name}}</h3>
+
+      <section id="rating" class="flex flex-row align-items-center align-content-center">
+        <p-rating [ngModel]="rating" [readonly]="true" [stars]="5" [cancel]="false" styleClass="m-0" [disabled]="true">
+        </p-rating>
+        <p class="text-500 m-0 ml-2">{{'(' + ratings.length + ')'}}</p>
+      </section>
+
+      <h5 class="text-xl text-500">{{game.releaseDate.toLocaleDateString() + ' (' + dateDiffInDays() + ' days ago)'}}
+      </h5>
+
+      <div id="game-platform">
+        <p class="text-500">Platform:</p>
+        <p-chip *ngFor="let platform of game.platforms" [label]="platform.name"
+          styleClass="mr-2  mb-2 custom-chip bg-cyan-800"></p-chip>
+
+      </div>
+
+      <div id="game-genre">
+        <p class="text-500">Genre:</p>
+        <p-chip *ngFor="let genre of game.genres" [label]="genre.name" styleClass="mr-2 mb-2 custom-chip bg-cyan-800">
+        </p-chip>
+
+      </div>
+
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+
+</div>

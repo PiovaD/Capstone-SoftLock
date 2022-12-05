@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AuthService } from 'src/app/Auth/auth.service';
+import { AuthService } from 'src/app/Services/auth.service';
 import { ValidatorService } from 'src/app/Models/validator.service';
 
 @Component({

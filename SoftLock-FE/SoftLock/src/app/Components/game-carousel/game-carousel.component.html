@@ -1,0 +1,25 @@
+<p-carousel *ngIf="games.length > 0 " [autoplayInterval]="3000" [circular]="true" [value]="games" [numVisible]="4"
+  [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="text-center">
+
+  <ng-template let-game pTemplate="item">
+
+    <div class="bg-cyan-800 hover:bg-cyan-700 w-max mx-auto border-round cursor-pointer"
+      [routerLink]="'/game/'+ game.slug">
+      <img [id]="game.slug" class="w-12rem xl:w-18rem"
+        [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+game.imageID+'.png'" [alt]="game.slug">
+
+      <h4 class="pb-3 m-0 mt-2">{{game.name}}</h4>
+
+    </div>
+  </ng-template>
+</p-carousel>
+
+
+<p-carousel *ngIf="!(games.length > 0) " [autoplayInterval]="3000" [circular]="true" [value]="[1,2,3,4,5,6,7]"
+  [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions" styleClass="text-center">
+  <ng-template let-game pTemplate="item">
+
+    <p-skeleton shape="rectangle" size="12rem" height="25rem"></p-skeleton>
+
+  </ng-template>
+</p-carousel>

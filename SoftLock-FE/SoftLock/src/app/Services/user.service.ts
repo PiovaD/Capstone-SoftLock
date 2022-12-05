@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
+import { Page } from '../Models/page';
 import { IUser } from '../Models/users/iuser';
 import { RoleType } from '../Models/users/role-type';
 
@@ -16,8 +17,8 @@ export class UserService {
     return this.http.get<IUser[]>(API + 'users');
   }
 
-  getAllUsersPaginate(page: number, size: number): Observable<IUser> {
-    return this.http.get<IUser>(API + 'users/pageable', { params: { "page": page, "size": size } });
+  getAllUsersPaginate(page: number, size: number): Observable<Page<IUser>> {
+    return this.http.get<Page<IUser>>(API + 'users/pageable', { params: { "page": page, "size": size } });
   }
 
   getUserById(id: number | string): Observable<IUser> {

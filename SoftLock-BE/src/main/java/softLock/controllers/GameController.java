@@ -130,7 +130,7 @@ public class GameController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<Iterable<Game>> searchGenres(
+    public ResponseEntity<Iterable<Game>> searchGenresOrPlatform(
             @RequestParam(name = "genresName",required = false) String genresName,
             @RequestParam(name = "platformsAbb", required = false) String platformsAbb
     ) {

@@ -185,6 +185,15 @@ public class PostController {
         }
     }
 
+    @GetMapping("/reviews/game-id")
+    public ResponseEntity<Iterable<Integer>> getReviewsByGameId(@RequestParam(name = "game-id") Long gameId) {
+        try {
+            return new ResponseEntity<>(reviewService.getReviewsByGameId(gameId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/answers/question")
     public ResponseEntity<Iterable<Answer>> findAnswerByQuestionId(@RequestParam(name = "question-id") Long userId) {
         try {

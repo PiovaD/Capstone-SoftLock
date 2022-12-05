@@ -8,7 +8,7 @@ export interface IGame {
   slug: string;
   summary: string;
   imageID: string;
-  relaseDate: Date;
-  generes: IGenre[];
+  releaseDate: Date;
+  genres: IGenre[];
   platforms: IPlatform[];
 }
