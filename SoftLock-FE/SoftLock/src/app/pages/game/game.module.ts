@@ -8,6 +8,8 @@ import { ChipModule } from 'primeng/chip';
 import {RatingModule} from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 
+import { PostCardModule } from 'src/app/Components/post-card/post-card.module';
+
 @NgModule({
   declarations: [
     GameComponent
@@ -18,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     DividerModule,
     ChipModule,
     RatingModule,
-    FormsModule
+    FormsModule,
+    PostCardModule
   ]
 })
 export class GameModule { }

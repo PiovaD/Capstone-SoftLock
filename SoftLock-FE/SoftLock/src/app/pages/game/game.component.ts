@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGame } from 'src/app/Models/games/igame';
 import { IPost } from 'src/app/Models/posts/ipost';
+import { IReview } from 'src/app/Models/posts/ireview';
 import { GameService } from 'src/app/Services/game.service';
 import { PostService } from 'src/app/Services/post.service';
 
@@ -16,6 +17,10 @@ export class GameComponent implements OnInit {
 
   ratings: number[] = [];;
   rating: number = 0;
+
+  reviews: IReview[] = [];
+
+  questions: IPost[] = [];
 
   constructor(private gameService: GameService, private postService: PostService, private route: ActivatedRoute, private router: Router) { }
 

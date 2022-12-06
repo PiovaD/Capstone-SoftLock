@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { EditProfileRoutingModule } from './edit-profile-routing.module';
 import { EditProfileComponent } from './edit-profile.component';
-import { RegistrationModule } from '../registration/registration.module';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
+import { UserFormModule } from 'src/app/Components/user-form/user-form.module';
+import { PasswordFormModule } from 'src/app/Components/password-form/password-form.module';
+import { AvatarFormModule } from 'src/app/Components/avatar-form/avatar-form.module';
+import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import {ConfirmationService} from 'primeng/api';
     imports: [
         CommonModule,
         EditProfileRoutingModule,
-        RegistrationModule,
+        UserFormModule,
+        PasswordFormModule,
+        AvatarFormModule,
+        FormSharedModule,
         ConfirmDialogModule
     ]
 })

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
 import { Page } from '../Models/page';
+import { IAnswer } from '../Models/posts/ianswer';
 import { IPost } from '../Models/posts/ipost';
 
 @Injectable({
@@ -27,7 +28,7 @@ export class PostService {
     return this.http.get<T>(API + 'posts/id', { params: { "id": id } });
   }
 
-  getGameBySlug<T>(slug: string): Observable<T> {
+  getPostBySlug<T>(slug: string): Observable<T> {
     return this.http.get<T>(API + 'posts/title/' + slug);
   }
 
@@ -47,8 +48,8 @@ export class PostService {
     return this.http.get<T[]>(API + 'posts/search', { params: { "post-name": name, "title": title } });
   }
 
-  getAnswerByQuestionId<T>(questionID: number): Observable<T[]> {
-    return this.http.get<T[]>(API + 'posts/answers/question', { params: { "question-id": questionID } });
+  getAnswersByQuestionId(questionID: number): Observable<IAnswer[]> {
+    return this.http.get<IAnswer[]>(API + 'posts/answers/question', { params: { "question-id": questionID } });
   }
 
   getReviewVotesByGameId(id: number | string): Observable<number[]> {

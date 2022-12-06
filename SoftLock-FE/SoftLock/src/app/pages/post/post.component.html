@@ -1,0 +1,30 @@
+<div *ngIf="post" class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
+  <div class="flex flex-column sm:flex-row ">
+    <img [id]="post.game.slug" [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+post.game.imageID+'.png'"
+      [alt]="post.game.slug" class="max-h-22rem max-w-17rem transition-all transition-duration-300 hover:shadow-8 cursor-pointer"
+      [routerLink]="'/game/'+ post.game.slug">
+
+    <div class="ml-5">
+      <h3 class="text-4xl mb-2">{{post.game.name}}</h3>
+
+      <p-divider [align]="'center'"> <span>Summary</span> </p-divider>
+
+      <p>{{post.game.summary}}</p>
+
+    </div>
+
+  </div>
+
+  <p-divider [align]="'center'"> <span>{{isReview()? "Review" : "Question" }}</span> </p-divider>
+
+  <app-post-card [post]="post"></app-post-card>
+
+  <div *ngIf="!isReview()">
+    <p-divider [align]="'center'"> <span>Answer</span> </p-divider>
+
+  <app-post-card *ngFor="let answer of answers" [post]="answer"></app-post-card>
+  </div>
+
+
+</div>
+

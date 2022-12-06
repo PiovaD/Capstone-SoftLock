@@ -6,16 +6,18 @@
     <section class="flex-1">
       <p-divider [align]="'center'"> <span class="p-2">Questions</span> </p-divider>
 
-      <div class="flex flex-wrap">
-        <app-post-card *ngFor="let post of questions" [post]="post" class="flex-1"></app-post-card>
+      <div class="flex flex-wrap align-items-stretch">
+        <app-post-card *ngFor="let post of questions" [post]="post" class="flex-1 transition-duration-300 hover:shadow-8"
+          ></app-post-card>
       </div>
     </section>
 
     <section class="flex-1">
       <p-divider [align]="'center'"> <span class="p-2">Reviews</span> </p-divider>
 
-      <div class="flex flex-wrap">
-        <app-post-card *ngFor="let post of reviews" [post]="post" class="flex-1"></app-post-card>
+      <div class="flex flex-wrap align-items-stretch">
+        <app-post-card *ngFor="let post of reviews" [post]="post" class="flex-1 cursor-pointer transition-duration-300 hover:shadow-8"
+          [routerLink]="'post/'+post.titleSlug"></app-post-card>
       </div>
     </section>
 

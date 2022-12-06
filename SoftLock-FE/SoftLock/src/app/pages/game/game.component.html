@@ -33,8 +33,29 @@
     </div>
   </div>
 
-  <p-divider [align]="'center'"> <span>Summary</span> </p-divider>
+  <div class="flex flex-column">
+    <p-divider [align]="'center'"> <span>Summary</span> </p-divider>
 
-  <p>{{game.summary}}</p>
+    <p>{{game.summary}}</p>
 
+
+    <section class="flex-1">
+      <p-divider [align]="'center'"> <span class="p-2">Questions</span> </p-divider>
+
+      <div class="flex flex-wrap align-items-stretch">
+        <app-post-card *ngFor="let post of questions" [post]="post" class="flex-1 cursor-pointer"
+          [routerLink]="'post/'+post.titleSlug"></app-post-card>
+      </div>
+    </section>
+
+    <section class="flex-1">
+      <p-divider [align]="'center'"> <span class="p-2">Reviews</span> </p-divider>
+
+      <div class="flex flex-wrap align-items-stretch">
+        <app-post-card *ngFor="let post of reviews" [post]="post" class="flex-1 cursor-pointer"
+          [routerLink]="'post/'+post.titleSlug"></app-post-card>
+      </div>
+    </section>
+
+  </div>
 </div>

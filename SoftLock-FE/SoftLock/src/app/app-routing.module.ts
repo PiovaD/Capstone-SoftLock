@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/game/game.module').then(m => m.GameModule)
   },
   {
+    path: 'post',
+    loadChildren: () => import('./pages/post/post.module').then(m => m.PostModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

@@ -20,5 +20,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Set<Post> findByGameNameContainsIgnoreCaseAndTitleContainsIgnoreCase(String name, String title);
 
-
 }

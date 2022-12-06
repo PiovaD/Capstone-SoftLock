@@ -1,31 +1,51 @@
-<p-card styleClass="my-3 mx-2">
+<p-card styleClass="my-3 mx-2  transition-all">
 
   <ng-template pTemplate="header">
-    <div id="card-post-id" class="text-center py-4 bg-cyan-900 border-round">
+    <div id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'post/'+post.titleSlug">
       <h3 class="m-0 mb-2">{{post.title}}</h3>
       <span>{{post.game.name}}</span>
     </div>
   </ng-template>
 
-  <p-scrollPanel styleClass="h-6rem">
+  <p-rating *ngIf="isReview(post)" [ngModel]="vote" [readonly]="true" [stars]="5" [cancel]="false" styleClass="m-0"
+    [disabled]="true">
+  </p-rating>
+
+  <p-scrollPanel styleClass="h-7rem mt-3">
     {{post.text}}
   </p-scrollPanel>
 
-
   <ng-template pTemplate="footer">
-    <div class="flex justify-content-end text-right">
-      <span class="cursor-pointer flex align-items-center" [routerLink]="'profile/'+post.user.username">
-        {{post.user.username}}
+    <div class="flex flex-row flex-wrap justify-content-between align-content-center">
 
-        <p-avatar *ngIf=" post.user.profilePicUrl != null" [image]="post.user.profilePicUrl || '' "
-          styleClass="ml-2  w-2rem h-2rem" size="large" shape="circle"></p-avatar>
+      <div class="flex flex-row gap-3 flex-wrap align-content-center">
 
-        <p-avatar *ngIf="post.user.profilePicUrl == null" icon="pi pi-user" styleClass="ml-2 w-2rem h-2rem" size="large"
-          shape="circle"></p-avatar>
-      </span>
+        <div class="text-700 cursor-pointer">
+          <i class="pi pi-arrow-circle-up mr-2 text-green-400"></i>
+          {{post.upVote.length}}
+        </div>
+
+        <div class="text-700 cursor-pointer">
+          <i class="pi pi-arrow-circle-down mr-2 text-red-400"></i>
+          {{post.downVote.length}}
+        </div>
+
+      </div>
+
+      <div class="flex justify-content-end text-right">
+        <span class="cursor-pointer flex align-items-center h-3rem" [routerLink]="'profile/'+post.user.username">
+          {{post.user.username}}
+
+          <p-avatar *ngIf=" post.user.profilePicUrl != null" [image]="post.user.profilePicUrl || '' "
+            styleClass="ml-2  w-2rem h-2rem" size="large" shape="circle"></p-avatar>
+
+          <p-avatar *ngIf="post.user.profilePicUrl == null" icon="pi pi-user" styleClass="ml-2 w-2rem h-2rem"
+            size="large" shape="circle"></p-avatar>
+        </span>
+
+      </div>
 
     </div>
-
   </ng-template>
 
 </p-card>
