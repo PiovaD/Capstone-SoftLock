@@ -20,6 +20,8 @@ import {CarouselModule} from 'primeng/carousel';
 import {CardModule} from 'primeng/card';
 import {DividerModule} from 'primeng/divider'
 import {SkeletonModule} from 'primeng/skeleton';
+import { PostCardComponent } from './Components/post-card/post-card.component';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {SkeletonModule} from 'primeng/skeleton';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    GameCarouselComponent
+    GameCarouselComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {SkeletonModule} from 'primeng/skeleton';
     CarouselModule,
     CardModule,
     DividerModule,
-    SkeletonModule
+    SkeletonModule,
+    ScrollPanelModule
 
   ],
   providers: [

@@ -195,9 +195,9 @@ public class PostController {
     }
 
     @GetMapping("/answers/question")
-    public ResponseEntity<Iterable<Answer>> findAnswerByQuestionId(@RequestParam(name = "question-id") Long userId) {
+    public ResponseEntity<Iterable<Answer>> findAnswerByQuestionId(@RequestParam(name = "question-id") Long questionId) {
         try {
-            return new ResponseEntity<>(answerService.findByQuestion(userId), HttpStatus.OK);
+            return new ResponseEntity<>(answerService.findByQuestion(questionId), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

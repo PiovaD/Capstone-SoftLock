@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGame } from 'src/app/Models/games/igame';
+import { IPost } from 'src/app/Models/posts/ipost';
 import { GameService } from 'src/app/Services/game.service';
 import { PostService } from 'src/app/Services/post.service';
 
@@ -31,21 +32,18 @@ export class GameComponent implements OnInit {
           error: () => this.router.navigate(['/'])
         })
     })
-
-
-
   }
 
-  setReview(){
-    if(this.game){
-     this.postService.getPostByGameId(this.game.id)
-    .subscribe({
-      next: (res) => {
-        this.ratings = res;
-        this.rating = (res.reduce((a, b) => a + b, 0))/res.length;
-      }
-    })
-  }
+  setReview() {
+    if (this.game) {
+      this.postService.getReviewVotesByGameId(this.game.id)
+        .subscribe({
+          next: (res) => {
+            this.ratings = res;
+            this.rating = (res.reduce((a, b) => a + b, 0)) / res.length;
+          }
+        })
+    }
   }
 
   dateDiffInDays(): number {

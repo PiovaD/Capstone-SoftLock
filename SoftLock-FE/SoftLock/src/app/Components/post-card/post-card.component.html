@@ -1,0 +1,31 @@
+<p-card styleClass="my-3 mx-2">
+
+  <ng-template pTemplate="header">
+    <div id="card-post-id" class="text-center py-4 bg-cyan-900 border-round">
+      <h3 class="m-0 mb-2">{{post.title}}</h3>
+      <span>{{post.game.name}}</span>
+    </div>
+  </ng-template>
+
+  <p-scrollPanel styleClass="h-6rem">
+    {{post.text}}
+  </p-scrollPanel>
+
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end text-right">
+      <span class="cursor-pointer flex align-items-center" [routerLink]="'profile/'+post.user.username">
+        {{post.user.username}}
+
+        <p-avatar *ngIf=" post.user.profilePicUrl != null" [image]="post.user.profilePicUrl || '' "
+          styleClass="ml-2  w-2rem h-2rem" size="large" shape="circle"></p-avatar>
+
+        <p-avatar *ngIf="post.user.profilePicUrl == null" icon="pi pi-user" styleClass="ml-2 w-2rem h-2rem" size="large"
+          shape="circle"></p-avatar>
+      </span>
+
+    </div>
+
+  </ng-template>
+
+</p-card>
