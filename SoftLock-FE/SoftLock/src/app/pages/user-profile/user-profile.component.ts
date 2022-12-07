@@ -4,6 +4,10 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { UserService } from 'src/app/Services/user.service';
 import { UserAuthRes } from 'src/app/Models/users/auth-res';
 import { IUser } from 'src/app/Models/users/iuser';
+import { PostService } from 'src/app/Services/post.service';
+import { IPost } from 'src/app/Models/posts/ipost';
+import { IAnswer } from 'src/app/Models/posts/ianswer';
+import { IReview } from 'src/app/Models/posts/ireview';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,11 +21,16 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
 
   posts?: any[];
 
-  upVote?: any[];
+  upVote: number = 0;
 
-  downVote?: any[];
+  downVote: number = 0;
 
-  constructor(private authServ: AuthService , private userServ: UserService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private authServ: AuthService,
+    private userServ: UserService,
+    private postService: PostService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -33,10 +42,26 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
           next: (res) => {
             this.user = res
           },
+          complete: () => this.getPosts(),
           error: () => this.router.navigate(['/'])
         })
     })
 
+  }
+
+  getPosts(): void {
+    if (this.user) {
+      this.postService.getByUserId<IPost | IAnswer | IReview>(this.user.id)
+        .subscribe(
+          res => {
+            this.posts = res
+            this.posts.map(res => {
+              this.upVote += res.upVote.length
+              this.downVote += res.downVote.length
+            })
+          }
+        )
+    }
   }
 
 }

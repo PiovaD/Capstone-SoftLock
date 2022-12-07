@@ -32,11 +32,11 @@ export class PostService {
     return this.http.get<T>(API + 'posts/title/' + slug);
   }
 
-  getByPostId<T>(gameId: string, url?: string): Observable<T> {
+  getByPostId<T>(gameId: number, url: string = ""): Observable<T> {
     return this.http.get<T>(API + 'posts' + url + '/game-id', { params: { "game-id": gameId } });
   }
 
-  getByUserId<T>(userId: string, url?: string): Observable<T[]> {
+  getByUserId<T>(userId: number, url: string = ""): Observable<T[]> {
     return this.http.get<T[]>(API + 'posts' + url + '/user-id', { params: { "user-id": userId } });
   }
 
