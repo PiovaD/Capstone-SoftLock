@@ -38,7 +38,10 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.removeAccess();
-    this.router.navigate(['/']);
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/game', {skipLocationChange: true}).then(()=>{
+    this.router.navigate([currentUrl])
+  });
   }
 
 }

@@ -8,6 +8,7 @@ import { PostService } from 'src/app/Services/post.service';
 import { IPost } from 'src/app/Models/posts/ipost';
 import { IAnswer } from 'src/app/Models/posts/ianswer';
 import { IReview } from 'src/app/Models/posts/ireview';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,11 +20,10 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
   user?: IUser;
   loggedUser?: UserAuthRes;
 
-  posts?: any[];
-
+  posts: IPost[] | IAnswer[] | IReview[] = [];
   upVote: number = 0;
-
   downVote: number = 0;
+
 
   constructor(
     private authServ: AuthService,
@@ -56,9 +56,12 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
           res => {
             this.posts = res
             this.posts.map(res => {
+              res.date = new Date(res.date)
               this.upVote += res.upVote.length
               this.downVote += res.downVote.length
             })
+
+            this.posts.sort((a,b) => <any>b.date - <any>a.date)
           }
         )
     }

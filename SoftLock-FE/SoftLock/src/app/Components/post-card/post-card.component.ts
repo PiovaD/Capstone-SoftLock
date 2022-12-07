@@ -35,6 +35,10 @@ export class PostCardComponent implements OnInit {
     return (<IReview>post).vote !== undefined;
   }
 
+  isAnswer(post: IPost | IAnswer | IReview): post is IAnswer {
+    return (<IAnswer>post).question !== undefined;
+  }
+
   isLoggedAndUpVoted(): boolean {
     if (this.user) {
       return (this.post.upVote.find(el => el.id == this.user?.id)) != undefined ? true : false
