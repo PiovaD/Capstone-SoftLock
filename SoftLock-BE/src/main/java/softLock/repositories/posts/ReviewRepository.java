@@ -13,6 +13,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Set<Review> findByUserId(Long id);
 
     @Query("select r.vote from Review r where r.game.id = ?1")
-    Iterable<Integer> getReviewsByGameId(Long id);
+    Iterable<Integer> getReviewsVoteByGameId(Long id);
+
+    Set<Review> findByGameId(Long id);
+
 
 }

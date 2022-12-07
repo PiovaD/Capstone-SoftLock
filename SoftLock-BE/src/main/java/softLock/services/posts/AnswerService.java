@@ -69,6 +69,10 @@ public class AnswerService {
         return rep.findByUserId(userId);
     }
 
+    public Iterable<Answer> findByGameId(Long gameId) {
+        return rep.findByGameId(gameId);
+    }
+
     private Answer findById(Long id) throws ByIdNotFoundException {
         Optional<Answer> res = rep.findById(id);
         if (res.isPresent()) {

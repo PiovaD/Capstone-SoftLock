@@ -11,4 +11,8 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     Set<Answer> findByQuestionId(Long id);
 
     Set<Answer> findByUserId(Long id);
+
+    Set<Answer> findByGameId(Long id);
+
+
 }

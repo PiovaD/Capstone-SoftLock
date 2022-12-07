@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
 
     this.getUserName()
 
-
   }
 
   getUserName(): string {
@@ -39,9 +38,9 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.authService.removeAccess();
     const currentUrl = this.router.url;
-    this.router.navigateByUrl('/game', {skipLocationChange: true}).then(()=>{
-    this.router.navigate([currentUrl])
-  });
+    this.router.navigateByUrl('/game', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl])
+    });
   }
 
 }

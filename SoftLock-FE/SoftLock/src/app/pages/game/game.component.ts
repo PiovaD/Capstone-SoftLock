@@ -22,7 +22,12 @@ export class GameComponent implements OnInit {
 
   questions: IPost[] = [];
 
-  constructor(private gameService: GameService, private postService: PostService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private gameService: GameService,
+    private postService: PostService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
@@ -33,7 +38,11 @@ export class GameComponent implements OnInit {
             this.game = res
             this.game.releaseDate = new Date(this.game.releaseDate)
           },
-          complete: () => this.setReview(),
+          complete: () => {
+            this.setReview()
+            this.getTopReviews()
+            this.getTopQuestions()
+          },
           error: () => this.router.navigate(['/'])
         })
     })
@@ -47,6 +56,26 @@ export class GameComponent implements OnInit {
             this.ratings = res;
             this.rating = (res.reduce((a, b) => a + b, 0)) / res.length;
           }
+        })
+    }
+  }
+
+  getTopReviews(): void {
+    if (this.game) {
+      this.postService.getByGameId<IPost>(this.game.id, "/questions")
+        .subscribe(res => {
+          res.sort((a, b) => a.downVote.length - b.downVote.length)
+          this.questions = res
+        })
+    }
+  }
+
+  getTopQuestions(): void {
+    if (this.game) {
+      this.postService.getByGameId<IReview>(this.game.id,"/reviews")
+        .subscribe(res => {
+          res.sort((a, b) => a.downVote.length - b.downVote.length)
+          this.reviews = res
         })
     }
   }

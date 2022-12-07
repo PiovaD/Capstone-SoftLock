@@ -40,20 +40,18 @@
 
 
     <section class="flex-1">
-      <p-divider [align]="'center'"> <span class="p-2">Questions</span> </p-divider>
+      <p-divider [align]="'center'"> <span class="p-2">Top 6 questions</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of questions" [post]="post" class="flex-1 cursor-pointer"
-          [routerLink]="'post/'+post.titleSlug"></app-post-card>
+        <app-post-card *ngFor="let post of questions | slice:0:6" [post]="post" class="flex-1 cursor-pointer"></app-post-card>
       </div>
     </section>
 
     <section class="flex-1">
-      <p-divider [align]="'center'"> <span class="p-2">Reviews</span> </p-divider>
+      <p-divider [align]="'center'"> <span class="p-2">Top 6 reviews</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of reviews" [post]="post" class="flex-1 cursor-pointer"
-          [routerLink]="'post/'+post.titleSlug"></app-post-card>
+        <app-post-card *ngFor="let post of reviews | slice:0:6" [post]="post" class="flex-1 cursor-pointer"></app-post-card>
       </div>
     </section>
 

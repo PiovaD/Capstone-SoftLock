@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import softLock.entities.posts.Answer;
 import softLock.entities.posts.Review;
 import softLock.exceptions.ByIdNotFoundException;
 import softLock.repositories.posts.ReviewRepository;
@@ -66,12 +67,16 @@ public class ReviewService {
         throw new ByIdNotFoundException("Review", id);
     }
 
-    public Iterable<Integer> getReviewsByGameId(Long gameId) {
-        return rep.getReviewsByGameId(gameId);
+    public Iterable<Integer> getReviewsVoteByGameId(Long gameId) {
+        return rep.getReviewsVoteByGameId(gameId);
     }
 
     public Iterable<Review> findByUserId(Long userId) {
         return rep.findByUserId(userId);
+    }
+
+    public Iterable<Review> findByGameId(Long gameId) {
+        return rep.findByGameId(gameId);
     }
 
     public Review update(Review updateReview) throws ByIdNotFoundException {

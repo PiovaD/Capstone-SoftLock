@@ -32,8 +32,8 @@ export class PostService {
     return this.http.get<T>(API + 'posts/title/' + slug);
   }
 
-  getByPostId<T>(gameId: number, url: string = ""): Observable<T> {
-    return this.http.get<T>(API + 'posts' + url + '/game-id', { params: { "game-id": gameId } });
+  getByGameId<T>(gameId: number, url: string = ""): Observable<T[]> {
+    return this.http.get<T[]>(API + 'posts' + url + '/game-id', { params: { "game-id": gameId } });
   }
 
   getByUserId<T>(userId: number, url: string = ""): Observable<T[]> {
@@ -53,7 +53,7 @@ export class PostService {
   }
 
   getReviewVotesByGameId(id: number | string): Observable<number[]> {
-    return this.http.get<number[]>(API + 'posts/reviews/game-id', { params: { "game-id": id } });
+    return this.http.get<number[]>(API + 'posts/reviews-vote/game-id', { params: { "game-id": id } });
   }
 
   /*---------------------POST---------------------*/

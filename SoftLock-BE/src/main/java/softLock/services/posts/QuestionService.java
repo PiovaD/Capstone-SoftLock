@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import softLock.entities.posts.Post;
 import softLock.entities.posts.Question;
 import softLock.exceptions.ByIdNotFoundException;
 import softLock.repositories.posts.QuestionRepository;
@@ -59,6 +60,10 @@ public class QuestionService {
 
     public Iterable<Question> findByUserId(Long userId) {
         return rep.findByUserId(userId);
+    }
+
+    public Iterable<Question> findByGameId(Long gameId) {
+        return rep.findByGameId(gameId);
     }
 
     private Question findById(Long id) throws ByIdNotFoundException {

@@ -131,6 +131,35 @@ public class PostController {
         }
     }
 
+    @GetMapping("questions/game-id")
+    public ResponseEntity<Iterable<Question>> findQuestionsByGameId(@RequestParam(name = "game-id") Long gameId) {
+        try {
+            return new ResponseEntity<>(questionService.findByGameId(gameId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("answers/game-id")
+    public ResponseEntity<Iterable<Answer>> findAnswersByGameId(@RequestParam(name = "game-id") Long gameId) {
+        try {
+            return new ResponseEntity<>(answerService.findByGameId(gameId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("reviews/game-id")
+    public ResponseEntity<Iterable<Review>> findReviewsByGameId(@RequestParam(name = "game-id") Long gameId) {
+        try {
+            return new ResponseEntity<>(reviewService.findByGameId(gameId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
     @GetMapping("/user-id")
     public ResponseEntity<Iterable<Post>> findByUserId(@RequestParam(name = "user-id") Long userId) {
         try {
@@ -185,10 +214,10 @@ public class PostController {
         }
     }
 
-    @GetMapping("/reviews/game-id")
+    @GetMapping("/reviews-vote/game-id")
     public ResponseEntity<Iterable<Integer>> getReviewsByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
-            return new ResponseEntity<>(reviewService.getReviewsByGameId(gameId), HttpStatus.OK);
+            return new ResponseEntity<>(reviewService.getReviewsVoteByGameId(gameId), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
