@@ -20,13 +20,15 @@
 
       <div class="flex flex-row gap-3 flex-wrap align-content-center">
 
-        <div class="text-700 cursor-pointer">
-          <i class="pi pi-arrow-circle-up mr-2 text-green-400"></i>
+        <div class="text-700 cursor-pointer" (click)="toggleUpVote()">
+          <i *ngIf="!isLoggedAndUpVoted()"class="pi pi-arrow-circle-up mr-2"></i>
+          <i *ngIf="isLoggedAndUpVoted()" class="pi pi-arrow-circle-up mr-2 text-green-400"></i>
           {{post.upVote.length}}
         </div>
 
-        <div class="text-700 cursor-pointer">
-          <i class="pi pi-arrow-circle-down mr-2 text-red-400"></i>
+        <div class="text-700 cursor-pointer" (click)="toggleDownVote()">
+          <i *ngIf="!isLoggedAndDownVoted()"class="pi pi-arrow-circle-down mr-2"></i>
+          <i *ngIf="isLoggedAndDownVoted()" class="pi pi-arrow-circle-down mr-2 text-red-400"></i>
           {{post.downVote.length}}
         </div>
 

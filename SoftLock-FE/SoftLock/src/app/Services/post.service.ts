@@ -65,20 +65,20 @@ export class PostService {
   /*---------------------PUT---------------------*/
 
   updatePost<T>(url: string, post: T): Observable<T> {
-    return this.http.post<T>(API + `posts/update-${url}`, post);
+    return this.http.put<T>(API + `posts/update-${url}`, post);
   }
 
   addUpVote<T>(postId: number, userId: number): Observable<T> {
-    return this.http.post<T>(`${API}posts/up-vote/add/${postId}/${userId}`, null);
+    return this.http.put<T>(`${API}posts/up-vote/add/${postId}/${userId}`, null);
   }
 
   addDownVote<T>(postId: number, userId: number): Observable<T> {
-    return this.http.post<T>(`${API}posts/down-vote/add/${postId}/${userId}`, null);
+    return this.http.put<T>(`${API}posts/down-vote/add/${postId}/${userId}`, null);
   }
 
   /*---------------------DELETE---------------------*/
 
-  removeDownVote<T>(postId: number, userId: number): Observable<T> {
+  removeVote<T>(postId: number, userId: number): Observable<T> {
     return this.http.delete<T>(`${API}posts/vote/remove/${postId}/${userId}`);
   }
 
