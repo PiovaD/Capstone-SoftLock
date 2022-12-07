@@ -25,25 +25,25 @@
     class="lg:flex hidden absolute lg:static left-0 top-100 z-1 shadow-2 lg:shadow-none lg:pr-5 w-full lg:w-auto surface-overlay">
     <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
 
-      <li id="home-link" [routerLink]="'/'">
-        <a pRipple
-          class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+      <li id="home-link" >
+        <a pRipple [routerLink]="'/'"
+          class="no-underline flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
           <i class="pi pi-home mr-2"></i>
           <span>Home</span>
         </a>
       </li>
 
       <li id="answers-link">
-        <a pRipple
-          class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+        <a pRipple [routerLink]="'/reviews'"
+          class="no-underline flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
           <i class="pi pi-star mr-2"></i>
           <span>Reviews</span>
         </a>
       </li>
 
       <li id="questions-link">
-        <a pRipple
-          class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+        <a pRipple [routerLink]="'/questions'"
+          class="no-underline flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
           <i class="pi pi-question-circle mr-2"></i>
           <span>Questions</span>
         </a>

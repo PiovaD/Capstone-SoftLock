@@ -32,6 +32,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/post/post.module').then(m => m.PostModule)
   },
   {
+    path: 'reviews',
+    loadChildren: () => import('./pages/reviews/reviews.module').then(m => m.ReviewsModule)
+  },
+  {
+    path: 'questions',
+    loadChildren: () => import('./pages/questions/questions.module').then(m => m.QuestionsModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

@@ -16,7 +16,7 @@ export class PostService {
 
   /*---------------------GET---------------------*/
 
-  getAllPosts<T>(url?: string): Observable<T[]> {
+  getAllPosts<T>(url: string = ''): Observable<T[]> {
     return this.http.get<T[]>(API + 'posts/' + url);
   }
 
