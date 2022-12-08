@@ -1,11 +1,11 @@
 <p-card styleClass="my-3 mx-2  transition-all">
 
   <ng-template pTemplate="header">
-    <div *ngIf="!isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'post/'+post.titleSlug">
+    <div *ngIf="!isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'/post/'+post.titleSlug">
       <h3 class="m-0 mb-2">{{post.title}}</h3>
       <span>{{post.game.name}}</span>
     </div>
-    <div *ngIf="isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'post/'+post.question.titleSlug">
+    <div *ngIf="isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'/post/'+post.question.titleSlug">
       <h3 class="m-0 mb-2">Answer to: </h3>
       <span>{{post.question.title}}</span>
     </div>
@@ -44,7 +44,7 @@
       </div>
 
       <div class="flex justify-content-end text-right">
-        <span class="cursor-pointer flex align-items-center h-3rem" [routerLink]="'profile/'+post.user.username">
+        <span class="cursor-pointer flex align-items-center h-3rem" [routerLink]="'/profile/'+post.user.username">
           {{post.user.username}}
 
           <p-avatar *ngIf=" post.user.profilePicUrl != null" [image]="post.user.profilePicUrl || '' "
