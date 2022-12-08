@@ -8,6 +8,6 @@ export interface IUser {
   email: string;
   password?: string;
   profilePicUrl: string | null;
-  role: { id: number, roleType: RoleType }[];
+  roles: { id: number, roleType: RoleType }[];
 }
 

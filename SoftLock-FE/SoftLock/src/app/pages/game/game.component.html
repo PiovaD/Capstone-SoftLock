@@ -1,8 +1,23 @@
 <div *ngIf="game" class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
 
+  <p-messages></p-messages>
+
   <div class="flex flex-column sm:flex-row">
-    <img [id]="game.slug" [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+game.imageID+'.png'"
-      [alt]="game.slug" class="max-h-22rem max-w-17rem">
+
+    <div class="max-w-max">
+      <img [id]="game.slug" [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+game.imageID+'.png'"
+        [alt]="game.slug" class="max-h-22rem max-w-full sm:max-w-17rem">
+
+
+      <section class="gap-2 flex">
+        <p-button *ngIf="user" type="button" icon="pi pi-question" label="Add question" styleClass="p-button-success"
+          (click)="displayQuestionForm = true"></p-button>
+
+        <p-button *ngIf="user && canReview()" type="button" icon="pi pi-star" label="Add review"
+          styleClass="p-button-success" (click)="displayReviewForm = true"></p-button>
+      </section>
+
+    </div>
 
     <div class="ml-5">
       <h3 class="text-4xl mb-2">{{game.name}}</h3>
@@ -75,3 +90,38 @@
     </span>
   </div>
 </div>
+
+
+<p-dialog header="Question" [(visible)]="displayQuestionForm" [modal]="true" styleClass="w-10 xl:w-7"
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="questionForm">
+    <app-post-form [postForm]="questionForm"></app-post-form>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Send" class="w-auto mb-3" (click)="submitQuestion()" [loading]="isLoading"
+      [disabled]="!questionForm.valid || !questionForm.dirty"></button>
+
+  </ng-template>
+
+</p-dialog>
+
+<p-dialog header="Review" [(visible)]="displayReviewForm" [modal]="true" styleClass="w-10 xl:w-7" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="reviewForm">
+
+    <p-rating formControlName="vote" [stars]="5" [cancel]="false" styleClass="m-0"></p-rating>
+
+    <app-post-form [postForm]="reviewForm"></app-post-form>
+
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Send" class="w-auto mb-3" (click)="submitReview()" [loading]="isLoading"
+      [disabled]="!reviewForm.valid || !reviewForm.dirty"></button>
+
+  </ng-template>
+
+</p-dialog>

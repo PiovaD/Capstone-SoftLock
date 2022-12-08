@@ -1,0 +1,11 @@
+<div [formGroup]="postForm" class="w-full">
+    <span class="p-float-label my-5 field w-full">
+        <input id="question-title" formControlName="title" type="text" class="w-full" pInputText>
+        <label for="question-title">Title</label>
+    </span>
+
+    <span class="p-float-label my-5 field">
+        <textarea id="float-input" rows="5" formControlName="text" class="w-full" pInputTextarea></textarea>
+        <label for="float-input">Question</label>
+    </span>
+</div>

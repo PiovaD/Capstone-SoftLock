@@ -84,7 +84,7 @@ export class EditProfileComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(3)]],
       username: [
         null,
-        [Validators.required, Validators.pattern('[\\S]{3,}$')],
+        [Validators.required, Validators.pattern('[\\S]{3,15}$')],
         this.validationService.usernameValidator,
       ],
       email: [

@@ -28,7 +28,6 @@ import { HeaderModule } from './header/header.module';
     PostCardModule,
     GameCarouselModule,
     HeaderModule,
-
     DividerModule,
 
   ],

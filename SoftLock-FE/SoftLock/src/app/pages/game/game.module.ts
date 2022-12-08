@@ -6,9 +6,11 @@ import { GameComponent } from './game.component';
 import {DividerModule} from 'primeng/divider';
 import { ChipModule } from 'primeng/chip';
 import {RatingModule} from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
 
 import { PostCardModule } from 'src/app/Components/post-card/post-card.module';
+import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module';
+import { PostFormModule } from 'src/app/Components/post-form/post-form.module';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,10 @@ import { PostCardModule } from 'src/app/Components/post-card/post-card.module';
     DividerModule,
     ChipModule,
     RatingModule,
-    FormsModule,
-    PostCardModule
+    FormSharedModule,
+    PostCardModule,
+    PostFormModule,
+    DialogModule
   ]
 })
 export class GameModule { }

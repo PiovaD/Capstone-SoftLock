@@ -10,7 +10,6 @@ import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module'
   exports: [UserFormComponent],
   imports: [
     CommonModule,
-
     FormSharedModule
   ]
 })

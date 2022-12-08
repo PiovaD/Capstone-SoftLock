@@ -92,7 +92,6 @@ export class PostComponent implements OnInit {
     }
   }
 
-
   isReview(): boolean {
     return (<IReview>this.post).vote !== undefined;
   }
