@@ -43,17 +43,35 @@
       <p-divider [align]="'center'"> <span class="p-2">Top 6 questions</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of questions | slice:0:6" [post]="post" class="flex-1 cursor-pointer"></app-post-card>
+        <app-post-card *ngFor="let post of questions | slice:0:6" [post]="post"
+          class="flex-1 cursor-pointer"></app-post-card>
       </div>
     </section>
+
+    <span class="text-center">
+      <a class="cursor-pointer no-underline text-color" [routerLink]="'/questions/'+game.slug">
+        <i class="pi pi-external-link mr-2"></i>
+        Show All
+      </a>
+    </span>
 
     <section class="flex-1">
-      <p-divider [align]="'center'"> <span class="p-2">Top 6 reviews</span> </p-divider>
+      <p-divider [align]="'center'">
+        <span class="p-2">Top 6 reviews</span>
+
+      </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of reviews | slice:0:6" [post]="post" class="flex-1 cursor-pointer"></app-post-card>
+        <app-post-card *ngFor="let post of reviews | slice:0:6" [post]="post"
+          class="flex-1 cursor-pointer"></app-post-card>
       </div>
     </section>
 
+    <span class="text-center">
+      <a class="cursor-pointer no-underline text-color" [routerLink]="'/reviews/'+game.slug">
+        <i class="pi pi-external-link mr-2"></i>
+        Show All
+      </a>
+    </span>
   </div>
 </div>

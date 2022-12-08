@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import softLock.entities.posts.Post;
 import softLock.entities.posts.Question;
 import softLock.exceptions.ByIdNotFoundException;
 import softLock.repositories.posts.QuestionRepository;

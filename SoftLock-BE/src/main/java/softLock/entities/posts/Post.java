@@ -1,15 +1,11 @@
 package softLock.entities.posts;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import softLock.entities.games.Game;
 import softLock.entities.users.User;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

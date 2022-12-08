@@ -6,7 +6,6 @@ import lombok.Setter;
 import softLock.entities.games.Game;
 import softLock.entities.users.User;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity

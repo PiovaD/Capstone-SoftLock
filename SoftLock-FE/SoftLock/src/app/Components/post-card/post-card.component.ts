@@ -81,4 +81,8 @@ export class PostCardComponent implements OnInit {
     }
   }
 
+  getDate(): string {
+    return new Date(this.post.date).toLocaleString()
+  }
+
 }

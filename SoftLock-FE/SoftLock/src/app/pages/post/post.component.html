@@ -1,11 +1,17 @@
 <div *ngIf="post" class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
+
+  <p-messages></p-messages>
+
   <div class="flex flex-column sm:flex-row ">
     <img [id]="post.game.slug" [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+post.game.imageID+'.png'"
-      [alt]="post.game.slug" class="max-h-22rem max-w-17rem transition-all transition-duration-300 hover:shadow-8 cursor-pointer"
+      [alt]="post.game.slug"
+      class="max-h-22rem max-w-17rem transition-all transition-duration-300 hover:shadow-8 cursor-pointer"
       [routerLink]="'/game/'+ post.game.slug">
 
     <div class="ml-5">
       <h3 class="text-4xl mb-2">{{post.game.name}}</h3>
+
+      <p-button *ngIf="!isReview()&& user" label="Answer the question" (click)="display = !display"></p-button>
 
       <p-divider [align]="'center'"> <span>Summary</span> </p-divider>
 
@@ -22,9 +28,26 @@
   <div *ngIf="!isReview()">
     <p-divider [align]="'center'"> <span>Answer</span> </p-divider>
 
-  <app-post-card *ngFor="let answer of answers" [post]="answer"></app-post-card>
+    <app-post-card *ngFor="let answer of answers" [post]="answer"></app-post-card>
   </div>
 
 
 </div>
 
+<p-dialog header="Reply" [(visible)]="display" [modal]="true" styleClass="w-10 xl:w-7" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="replyForm">
+
+    <textarea rows="5" pInputTextarea [autoResize]="false" class="w-full max-h-30rem" [autofocus]="true"
+      formControlName="text"></textarea>
+
+  </form>
+
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Send" class="w-auto mb-3" (click)="submitForm()" [loading]="isLoading"
+        [disabled]="!replyForm.valid || !replyForm.dirty"></button>
+
+    </ng-template>
+
+</p-dialog>
