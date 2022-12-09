@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class PostFormComponent implements OnInit {
 
   @Input() postForm!: FormGroup;
+  @Input() hasTitle: boolean = true;
 
   constructor() { }
 

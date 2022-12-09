@@ -1,5 +1,5 @@
 <div [formGroup]="postForm" class="w-full">
-    <span class="p-float-label my-5 field w-full">
+    <span *ngIf="hasTitle" class="p-float-label my-5 field w-full">
         <input id="question-title" formControlName="title" type="text" class="w-full" pInputText>
         <label for="question-title">
             {{postForm.controls['title'].valid || !postForm.controls['title'].dirty ? "Title": "Title is already in use" }}

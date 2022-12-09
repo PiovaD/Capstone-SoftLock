@@ -1,26 +1,44 @@
 <p-card styleClass="my-3 mx-2  transition-all">
 
+  <p-confirmDialog styleClass="w-8" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+  <p-toast styleClass="z-5" position="bottom-right"></p-toast>
+
   <ng-template pTemplate="header">
-    <div *ngIf="!isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'/post/'+post.titleSlug">
+    <div *ngIf="!isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer"
+      [routerLink]="'/post/'+post.titleSlug">
       <h3 class="m-0 mb-2">{{post.title}}</h3>
       <span>{{post.game.name}}</span>
     </div>
-    <div *ngIf="isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer" [routerLink]="'/post/'+post.question.titleSlug">
+    <div *ngIf="isAnswer(post)" id="card-post-id" class="text-center py-4 bg-cyan-900 border-round cursor-pointer"
+      [routerLink]="'/post/'+post.question.titleSlug">
       <h3 class="m-0 mb-2">Answer to: </h3>
       <span>{{post.question.title}}</span>
     </div>
   </ng-template>
 
-  <p-rating *ngIf="isReview(post)" [ngModel]="vote" [readonly]="true" [stars]="5" [cancel]="false" styleClass="m-0"
-    [disabled]="true">
-  </p-rating>
+  <section class="flex justify-content-between">
+
+    <div>
+      <p-rating *ngIf="isReview(post)" [ngModel]="vote" [readonly]="true" [stars]="5" [cancel]="false"
+        styleClass="m-0 mr-2" [disabled]="true">
+      </p-rating>
+    </div>
+
+    <div *ngIf="isUserPost(post)" class="flex gap-2">
+      <i class="pi pi-pencil text-yellow-500 cursor-pointer" (click)="updatePost(post)"></i>
+      <i class="pi pi-times text-red-500 cursor-pointer" (click)="deletePost(post)"></i>
+    </div>
+
+  </section>
+
 
   <p-scrollPanel styleClass="h-7rem mt-3">
     {{post.text}}
   </p-scrollPanel>
 
   <div class="right-0 mt-3 text-right text-color-secondary">
-    <span >{{getDate()}}</span>
+    <span>{{getDate()}}</span>
 
   </div>
 
@@ -30,13 +48,13 @@
       <div class="flex flex-row gap-3 flex-wrap align-content-center">
 
         <div class="text-700 cursor-pointer" (click)="toggleUpVote()">
-          <i *ngIf="!isLoggedAndUpVoted()"class="pi pi-arrow-circle-up mr-2"></i>
+          <i *ngIf="!isLoggedAndUpVoted()" class="pi pi-arrow-circle-up mr-2"></i>
           <i *ngIf="isLoggedAndUpVoted()" class="pi pi-arrow-circle-up mr-2 text-green-400"></i>
           {{post.upVote.length}}
         </div>
 
         <div class="text-700 cursor-pointer" (click)="toggleDownVote()">
-          <i *ngIf="!isLoggedAndDownVoted()"class="pi pi-arrow-circle-down mr-2"></i>
+          <i *ngIf="!isLoggedAndDownVoted()" class="pi pi-arrow-circle-down mr-2"></i>
           <i *ngIf="isLoggedAndDownVoted()" class="pi pi-arrow-circle-down mr-2 text-red-400"></i>
           {{post.downVote.length}}
         </div>
@@ -60,3 +78,23 @@
   </ng-template>
 
 </p-card>
+
+
+<p-dialog header="Update" [(visible)]="displayForm" [modal]="true" styleClass="w-10 xl:w-7" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="postForm">
+
+    <p-rating *ngIf="isReview(post)" formControlName="vote" [stars]="5" [cancel]="false" styleClass="m-0"></p-rating>
+
+    <app-post-form [postForm]="postForm" [hasTitle]="!isAnswer(post)"></app-post-form>
+
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Send" class="w-auto mb-3" (click)="submitPost()" [loading]="isLoading"
+      [disabled]="!postForm.valid || !postForm.dirty"></button>
+
+  </ng-template>
+
+</p-dialog>
