@@ -7,6 +7,7 @@ import { IPost } from 'src/app/Models/posts/ipost';
 import { IReview } from 'src/app/Models/posts/ireview';
 import { UserAuthRes } from 'src/app/Models/users/auth-res';
 import { IUser } from 'src/app/Models/users/iuser';
+import { ValidatorService } from 'src/app/Models/validator.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { GameService } from 'src/app/Services/game.service';
 import { PostService } from 'src/app/Services/post.service';
@@ -47,13 +48,14 @@ export class GameComponent implements OnInit {
     private postService: PostService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private validationService: ValidatorService,
   ) { }
 
   ngOnInit(): void {
 
     this.questionForm = this.formBuilder.group({
-      title: [null, [Validators.required, Validators.minLength(3)]],
+      title: [null, [Validators.required, Validators.minLength(3)], this.validationService.titleValidator],
       text: [null, [Validators.required, Validators.minLength(10)]],
       user: null,
       game: null
@@ -61,7 +63,7 @@ export class GameComponent implements OnInit {
 
     this.reviewForm = this.formBuilder.group({
       id: null,
-      title: [null, [Validators.required, Validators.minLength(3)]],
+      title: [null, [Validators.required, Validators.minLength(3)], this.validationService.titleValidator],
       text: [null, [Validators.required, Validators.minLength(10)]],
       vote: [1, [Validators.required]],
       user: null,
@@ -79,7 +81,6 @@ export class GameComponent implements OnInit {
             this.setReview()
             this.getTopReviews()
             this.getTopQuestions()
-            this.getUser()
           },
           error: () => this.router.navigate(['/'])
         })
@@ -114,11 +115,13 @@ export class GameComponent implements OnInit {
         .subscribe(res => {
           res.sort((a, b) => a.downVote.length - b.downVote.length)
           this.reviews = res
+          this.getUser()
         })
     }
   }
 
   getUser(): void {
+
     let user: UserAuthRes | null = this.authService.getLoggedUser()
     if (user) {
       this.userService.getUserById(user.id)
@@ -218,7 +221,7 @@ export class GameComponent implements OnInit {
     } else {
       this.postService.updatePost<IReview>("review", this.reviewForm.value)
         .subscribe({
-          next: (res) => this.reviews.splice(this.reviews.findIndex(r => r.user.id == this.user?.id && r.game.id == this.game?.id),1,res),
+          next: (res) => this.reviews.splice(this.reviews.findIndex(r => r.user.id == this.user?.id && r.game.id == this.game?.id), 1, res),
           error: (err) => {
             console.error('httpError', err);
             this.isLoading = false;
