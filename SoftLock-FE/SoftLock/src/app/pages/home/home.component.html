@@ -7,7 +7,7 @@
       <p-divider [align]="'center'"> <span class="p-2">Questions</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of questions" [post]="post"
+        <app-post-card *ngFor="let post of questions | slice:0:6" [post]="post"
           class="flex-1 transition-duration-300 hover:shadow-8"></app-post-card>
       </div>
     </section>
@@ -16,7 +16,7 @@
       <p-divider [align]="'center'"> <span class="p-2">Reviews</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
-        <app-post-card *ngFor="let post of reviews" [post]="post"
+        <app-post-card *ngFor="let post of reviews | slice:0:6" [post]="post"
           class="flex-1 cursor-pointer transition-duration-300 hover:shadow-8"></app-post-card>
       </div>
     </section>

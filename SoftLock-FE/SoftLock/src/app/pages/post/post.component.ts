@@ -86,7 +86,7 @@ export class PostComponent implements OnInit {
 
       this.postService.getAnswersByQuestionId(this.post.id)
         .subscribe({
-          next: (res) => this.answers = res.sort((a, b) => a.downVote.length - b.downVote.length || new Date(a.date) < new Date(b.date)? 1 : -1 ),
+          next: (res) => this.answers = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 ),
           error: () => this.router.navigate(['/'])
         })
     }

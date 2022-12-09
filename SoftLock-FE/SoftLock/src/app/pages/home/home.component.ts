@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getAllPosts<IReview>("reviews")
-    .subscribe((res)  => this.reviews = res)
+    .subscribe((res)  => this.reviews = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 ))
 
     this.postService.getAllPosts<IPost>("questions")
-    .subscribe((res)  => this.questions = res)
+    .subscribe((res)  => this.questions = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 ))
   }
 
 }
