@@ -58,7 +58,7 @@ public class ReviewService {
         return rep.findAll(p);
     }
 
-    private Review findById(Long id) throws ByIdNotFoundException {
+    public Review findById(Long id) throws ByIdNotFoundException {
         Optional<Review> res = rep.findById(id);
         if (res.isPresent()) {
             return res.get();
@@ -76,6 +76,10 @@ public class ReviewService {
 
     public Iterable<Review> findByGameId(Long gameId) {
         return rep.findByGameId(gameId);
+    }
+
+    public Iterable<Review> finByTitle(String title) {
+        return rep.findByTitle(title);
     }
 
     public Review update(Review updateReview) throws ByIdNotFoundException {

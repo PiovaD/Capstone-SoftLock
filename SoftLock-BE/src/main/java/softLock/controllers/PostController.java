@@ -187,6 +187,25 @@ public class PostController {
         }
     }
 
+    @GetMapping("/search/question-title")
+    public ResponseEntity<Iterable<Question>> searchByQuestionTitle(@RequestParam(name = "title") String title) {
+        try {
+            return new ResponseEntity<>(questionService.finByTitle(title), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/search/review-title")
+    public ResponseEntity<Iterable<Review>> searchByReviewTitle(@RequestParam(name = "title") String title) {
+        try {
+            return new ResponseEntity<>(reviewService.finByTitle(title), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
     @GetMapping("/questions/user-id")
     public ResponseEntity<Iterable<Question>> findQuestionByUserId(@RequestParam(name = "user-id") Long userId) {
         try {

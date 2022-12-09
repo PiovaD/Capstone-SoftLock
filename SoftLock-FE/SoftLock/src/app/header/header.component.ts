@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../Services/auth.service';
 import { UserAuthRes } from '../Models/users/auth-res';
@@ -14,7 +14,13 @@ export class HeaderComponent implements OnInit {
   isLogged: boolean = false;
   user?: UserAuthRes | null;
 
-  constructor(private primengConfig: PrimeNGConfig, private authService: AuthService, private router: Router) { }
+  value: string = "";
+
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true
@@ -41,6 +47,19 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/game', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl])
     });
+  }
+
+  search() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        s: this.value
+      }
+    }
+
+    this.router.navigate(['/search'],  {
+      queryParams: {q : this.value}
+    });
+
   }
 
 }

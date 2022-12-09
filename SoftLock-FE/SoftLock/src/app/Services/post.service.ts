@@ -56,6 +56,10 @@ export class PostService {
     return this.http.get<number[]>(API + 'posts/reviews-vote/game-id', { params: { "game-id": id } });
   }
 
+  findPostsByTitle<T>(url: string, title: string): Observable<T[]> {
+    return this.http.get<T[]>(API + 'posts/search/' + url + '-title', { params: { "title": title } });
+  }
+
   /*---------------------POST---------------------*/
 
   createNewPost<T>(url: string, post: T): Observable<T> {
@@ -82,7 +86,7 @@ export class PostService {
     return this.http.delete<T>(`${API}posts/vote/remove/${postId}/${userId}`);
   }
 
-  deletePost<T>(post: T): Observable<T>{
+  deletePost<T>(post: T): Observable<T> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: post
     };

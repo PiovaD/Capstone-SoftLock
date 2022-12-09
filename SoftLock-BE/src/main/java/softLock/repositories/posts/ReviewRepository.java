@@ -9,13 +9,15 @@ import java.util.Set;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-
     Set<Review> findByUserId(Long id);
 
     @Query("select r.vote from Review r where r.game.id = ?1")
     Iterable<Integer> getReviewsVoteByGameId(Long id);
 
     Set<Review> findByGameId(Long id);
+
+    @Query("select r from Review r where upper(r.title) like upper(concat('%', ?1, '%'))")
+    Set<Review> findByTitle(String title);
 
 
 }

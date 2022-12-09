@@ -40,6 +40,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/questions/questions.module').then(m => m.QuestionsModule)
   },
   {
+    path: 'search',
+    loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

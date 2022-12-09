@@ -9,6 +9,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import {RippleModule} from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -24,7 +25,8 @@ import {MenubarModule} from 'primeng/menubar';
     StyleClassModule,
     RippleModule,
     ButtonModule,
-    MenubarModule
+    MenubarModule,
+    FormsModule
   ]
 })
 export class HeaderModule { }

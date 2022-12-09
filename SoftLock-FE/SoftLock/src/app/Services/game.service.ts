@@ -26,11 +26,11 @@ export class GameService {
   }
 
   getGameById(id: number | string): Observable<IGame> {
-    return this.http.get<IGame>(API + 'games/igdb-id', { params: { "id": id } });
+    return this.http.get<IGame>(API + 'games/id', { params: { "id": id } });
   }
 
   getGameByIgdbId(id: number | string): Observable<IGame> {
-    return this.http.get<IGame>(API + 'games/id', { params: { "id": id } });
+    return this.http.get<IGame>(API + 'games/igdb-id', { params: { "id": id } });
   }
 
   getGameByExactName(name: string): Observable<IGame> {

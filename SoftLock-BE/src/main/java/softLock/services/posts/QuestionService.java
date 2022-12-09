@@ -65,12 +65,16 @@ public class QuestionService {
         return rep.findByGameId(gameId);
     }
 
-    private Question findById(Long id) throws ByIdNotFoundException {
+    public Question findById(Long id) throws ByIdNotFoundException {
         Optional<Question> res = rep.findById(id);
         if (res.isPresent()) {
             return res.get();
         }
         throw new ByIdNotFoundException("Question", id);
+    }
+
+    public Iterable<Question> finByTitle(String title) {
+        return rep.findByTitle(title);
     }
 
     public Question update(Question updateQuestion) throws ByIdNotFoundException {

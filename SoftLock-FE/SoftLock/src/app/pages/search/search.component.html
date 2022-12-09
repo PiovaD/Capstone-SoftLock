@@ -1,0 +1,49 @@
+<div class="surface-border mx-auto border-round surface-section p-3 lg:w-8 shadow-8">
+    <p-tabView>
+
+        <p-tabPanel rightIcon="pi pi-star" header="Reviews">
+
+            <p *ngIf="reviewsFind.length == 0">No results found.</p>
+
+            <app-post-card *ngFor="let review of reviewsFind" [post]="review"></app-post-card>
+
+        </p-tabPanel>
+
+        <p-tabPanel rightIcon="pi pi-question" header="Questions">
+            <ng-template pTemplate="content">
+
+                <p *ngIf="questionsFind.length == 0">No results found.</p>
+
+                <app-post-card *ngFor="let question of questionsFind" [post]="question"></app-post-card>
+
+            </ng-template>
+        </p-tabPanel>
+
+        <p-tabPanel rightIcon="pi pi-caret-right" header="Games">
+            <ng-template pTemplate="content">
+
+                <p *ngIf="!gamesLoading && gamesFind.length == 0">No results found.</p>
+
+                <div *ngIf="gamesLoading" class="text-center">
+                    <p-progressSpinner></p-progressSpinner>
+                </div>
+
+                <div *ngFor="let game of gamesFind">
+                    <div class="flex gap-2 cursor-pointer hover:surface-hover" (click)="openGame(game)">
+                        <img [src]="'https://images.igdb.com/igdb/image/upload/t_cover_small/' + game.imageID + '.png'"
+                            alt="">
+
+                        <section>
+                            <h3>{{ game.name }}</h3>
+                            <p class="text-color-secondary">{{game.releaseDate}}</p>
+                        </section>
+
+                    </div>
+                    <p-divider></p-divider>
+
+                </div>
+
+            </ng-template>
+        </p-tabPanel>
+    </p-tabView>
+</div>

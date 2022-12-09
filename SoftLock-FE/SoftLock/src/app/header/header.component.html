@@ -11,8 +11,10 @@
     <span class="flex align-items-center">
       <i class="pi pi-search "></i>
     </span>
+
     <input type="text" class="appearance-none border-none flex-auto bg-transparent outline-none p-component pl-3 "
-      placeholder="Search">
+      placeholder="Search" [(ngModel)]="value" (keyup)="$event.keyCode == 13 ? search() : null">
+
   </div>
 
   <a pRipple
@@ -25,7 +27,7 @@
     class="lg:flex hidden absolute lg:static left-0 top-100 z-1 shadow-2 lg:shadow-none lg:pr-5 w-full lg:w-auto surface-overlay">
     <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
 
-      <li id="home-link" >
+      <li id="home-link">
         <a pRipple [routerLink]="'/'"
           class="no-underline flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-100 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
           <i class="pi pi-home mr-2"></i>
