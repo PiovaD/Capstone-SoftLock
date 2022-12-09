@@ -8,6 +8,7 @@ import { PostCardModule } from 'src/app/Components/post-card/post-card.module';
 import {TabViewModule} from 'primeng/tabview';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { DividerModule } from 'primeng/divider';
+import {BlockUIModule} from 'primeng/blockui';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { DividerModule } from 'primeng/divider';
     PostCardModule,
     TabViewModule,
     ProgressSpinnerModule,
-    DividerModule
+    DividerModule,
+    BlockUIModule
   ]
 })
 export class SearchModule { }

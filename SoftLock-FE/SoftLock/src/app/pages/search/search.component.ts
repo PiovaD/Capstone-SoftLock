@@ -19,6 +19,8 @@ export class SearchComponent implements OnInit {
 
   gamesLoading: boolean = false
 
+  creating: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -47,22 +49,29 @@ export class SearchComponent implements OnInit {
 
   getGames(title: string): void {
     this.gameService.getGameInIgdb(title, 10)
-      .subscribe(res => {
-        this.gamesFind = res
-        this.gamesLoading = false
+      .subscribe({
+        next: res => {
+          this.gamesFind = res
+          this.gamesLoading = false
+        },
+        error: () => this.gamesLoading = false
       })
   }
 
   openGame(game: IGame): void {
+    this.creating = true
     this.gameService.getGameByIgdbId(game.igdbID)
-    .subscribe({
-      next: (res) => console.log(res),
-      complete: () => this.router.navigate(['/game/'+ game.slug]),
-      error: () => {
-        this.gameService.addFormIgdbGame(game.igdbID)
-        .subscribe(() => this.router.navigate(['/game/'+ game.slug]))
-      }
-    })
+      .subscribe({
+        next: () => this.creating = false,
+        complete: () => this.router.navigate(['/game/' + game.slug]),
+        error: () => {
+          this.gameService.addFormIgdbGame(game.igdbID)
+            .subscribe(() => {
+              this.creating = false
+              this.router.navigate(['/game/' + game.slug])
+            })
+        }
+      })
 
   }
 

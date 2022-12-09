@@ -109,6 +109,7 @@ public class GameController {
                 .header("Accept", "application/json")
                 .body("fields " +
                         "name, slug, first_release_date, summary, genres, platforms;" +
+                        "where category=0;" +
                         "search " + '"' + name + '"' + ";" +
                         "limit " + size + ";")
                 .asJson();
