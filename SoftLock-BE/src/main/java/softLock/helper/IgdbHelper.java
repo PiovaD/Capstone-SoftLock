@@ -156,9 +156,9 @@ public class IgdbHelper {
                 .asJson();
 
         JSONObject rawPlatform = jsonResponse.getBody().getArray().getJSONObject(0);
-        genre.setIgdbID(rawPlatform.getLong("id"));
-        genre.setName(rawPlatform.getString("name"));
-        genre.setSlug(rawPlatform.getString("slug"));
+        genre.setIgdbID(rawPlatform.has("id") ? rawPlatform.getLong("id") : null);
+        genre.setName(rawPlatform.has("name") ? rawPlatform.getString("name") : null);
+        genre.setSlug(rawPlatform.has("slug") ? rawPlatform.getString("slug") : null);
 
         return genreService.save(genre);
     }
@@ -178,11 +178,11 @@ public class IgdbHelper {
                 .asJson();
 
         JSONObject rawPlatform = jsonResponse.getBody().getArray().getJSONObject(0);
-        platform.setIgdbID(rawPlatform.getLong("id"));
-        platform.setName(rawPlatform.getString("name"));
-        platform.setSlug(rawPlatform.getString("slug"));
-        platform.setAbbreviation(rawPlatform.getString("abbreviation"));
-        platform.setPlatformImageId(getImg(rawPlatform.getLong("platform_logo"), "id", "platform_logos"));
+        platform.setIgdbID(rawPlatform.has("id") ? rawPlatform.getLong("id") : null);
+        platform.setName(rawPlatform.has("name") ? rawPlatform.getString("name") : null);
+        platform.setSlug(rawPlatform.has("slug") ? rawPlatform.getString("slug") : null);
+        platform.setAbbreviation(rawPlatform.has("abbreviation") ? rawPlatform.getString("abbreviation") : null);
+        platform.setPlatformImageId(getImg(rawPlatform.has("platform_logo") ? rawPlatform.getLong("platform_logo") : null, "id", "platform_logos"));
 
         return platformService.save(platform);
     }
