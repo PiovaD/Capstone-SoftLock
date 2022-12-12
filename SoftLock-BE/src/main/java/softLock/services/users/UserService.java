@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -116,6 +117,15 @@ public class UserService {
         }
 
         return rep.save(oldUser);
+    }
+
+    public User setRoles( User user) throws ByIdNotFoundException {
+        User oldUser = findById(user.getId());
+
+        oldUser.setRoles(user.getRoles());
+
+        return rep.save(oldUser);
+
     }
 
     public User removeRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
 import { Page } from '../Models/page';
+import { IRole } from '../Models/users/irole';
 import { IUser } from '../Models/users/iuser';
 import { RoleType } from '../Models/users/role-type';
 
@@ -12,6 +13,10 @@ import { RoleType } from '../Models/users/role-type';
 export class UserService {
 
   constructor(private http: HttpClient) { }
+
+  getAllRoles(): Observable<IRole[]> {
+    return this.http.get<IRole[]>(API + 'users/roles');
+  }
 
   getAllUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>(API + 'users');
@@ -39,6 +44,10 @@ export class UserService {
 
   updateUserPassword(user: IUser): Observable<IUser> {
     return this.http.put<IUser>(API + 'users/update-password', user);
+  }
+
+  setRolesToUser(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>(API + 'users/set-roles', user);
   }
 
   addRoleUser(user: IUser, role: RoleType): Observable<IUser> {

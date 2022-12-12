@@ -1,4 +1,4 @@
-import { RoleType } from "./role-type";
+import { IRole } from "./irole";
 
 export interface IUser {
   id: number;
@@ -8,6 +8,6 @@ export interface IUser {
   email: string;
   password?: string;
   profilePicUrl: string | null;
-  roles: { id: number, roleType: RoleType }[];
+  roles: IRole[];
 }
 

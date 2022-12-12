@@ -8,12 +8,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import softLock.entities.users.Role;
 import softLock.entities.users.RoleType;
 import softLock.entities.users.User;
 import softLock.exceptions.ByIdNotFoundException;
 import softLock.exceptions.ByNameNotFoundException;
 import softLock.exceptions.ByRoleFoundException;
+import softLock.services.users.RoleService;
 import softLock.services.users.UserService;
+
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -24,7 +28,15 @@ public class UserController {
     @Autowired
     UserService serv;
 
+    @Autowired
+    RoleService roleService;
+
     /*---------------------GET---------------------*/
+
+    @GetMapping("roles")
+    public ResponseEntity<Iterable<Role>> getAllRoles() {
+        return new ResponseEntity<>(roleService.getAll(), HttpStatus.OK);
+    }
 
     @GetMapping("")
     public ResponseEntity<Iterable<User>> getAllUsers() {
@@ -113,6 +125,22 @@ public class UserController {
 
         } catch (ByIdNotFoundException e) {
             log.error("Error updating user: " + e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/set-roles")
+    @PreAuthorize("hasAnyRole('DEV', 'ADMIN')")
+    public ResponseEntity<User> setRoles(@RequestBody User user) {
+        try {
+            return new ResponseEntity<>(serv.setRoles(user), HttpStatus.OK);
+
+        } catch (ByIdNotFoundException e) {
+            log.error("Error set roles: " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {

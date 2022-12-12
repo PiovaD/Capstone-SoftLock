@@ -9,6 +9,8 @@ import { IPost } from 'src/app/Models/posts/ipost';
 import { IAnswer } from 'src/app/Models/posts/ianswer';
 import { IReview } from 'src/app/Models/posts/ireview';
 import { SelectItem } from 'primeng/api';
+import { RoleType } from 'src/app/Models/users/role-type';
+import { IRole } from 'src/app/Models/users/irole';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,6 +26,9 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
   upVote: number = 0;
   downVote: number = 0;
 
+  roles: IRole[] = []
+
+  selectedRoles: IRole[] = []
 
   constructor(
     private authServ: AuthService,
@@ -41,12 +46,21 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
         .subscribe({
           next: (res) => {
             this.user = res
+            this.getAllRoles()
+            this.getSelectedRoles()
           },
           complete: () => this.getPosts(),
           error: () => this.router.navigate(['/'])
         })
     })
 
+  }
+
+  isAdmin(): boolean {
+    if(this.loggedUser){
+      return this.loggedUser.roles.find(role=> role == "ROLE_DEV" || role == "ROLE_ADMIN")? true : false;
+    }
+    return false;
   }
 
   getPosts(): void {
@@ -61,16 +75,50 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
               this.downVote += res.downVote.length
             })
 
-            this.posts.sort((a,b) => <any>b.date - <any>a.date)
+            this.posts.sort((a, b) => <any>b.date - <any>a.date)
           }
         )
     }
   }
 
+  getAllRoles(): void {
+    this.userServ.getAllRoles().subscribe(res => this.roles = res)
+  }
+
+  getSelectedRoles(): void {
+    if (this.user) {
+      this.user.roles.forEach(
+        role => this.selectedRoles.push(role)
+      )
+    }
+  }
+
   getRoleClass(): string {
     if (this.user)
-    return this.authServ.getClassByUserRole(this.user)
+      return this.authServ.getClassByUserRole(this.user)
     return ""
+  }
+
+  saveRoles(): void {
+    if (this.user) {
+      this.user.roles = this.selectedRoles
+
+      this.userServ.setRolesToUser(this.user)
+        .subscribe({
+          complete: () => this.refresh(),
+          error: (err) => {
+            console.log(err);
+            this.refresh()
+          }
+        })
+    }
+  }
+
+  refresh(): void {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/game', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl])
+    });
   }
 
 }

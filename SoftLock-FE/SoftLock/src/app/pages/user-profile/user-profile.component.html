@@ -23,6 +23,13 @@
       <a pButton *ngIf="user?.username == loggedUser?.username" label="Edit profile" icon="pi pi-pencil"
         class="p-button-info no-underline" iconPos="right" [routerLink]="'/profile-edit'"></a>
 
+      <div *ngIf="isAdmin()">
+        <button pButton icon="pi pi-pencil" class="p-button-secondary p-button-outlined" iconPos="right" (click)="saveRoles()"></button>
+        <p-multiSelect defaultLabel="Roles" [options]="roles" [(ngModel)]="selectedRoles" [filter]="false" optionLabel="roleType"
+          [displaySelectedLabel]="false" [showHeader]="false"></p-multiSelect>
+      </div>
+
+
     </div>
 
     <div class="flex gap-5 justify-content-center  align-items-center flex-wrap text-sm lg:ml-5">
