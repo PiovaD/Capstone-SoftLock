@@ -6,13 +6,13 @@
     <div id="user-info-avatar">
 
       <div *ngIf="user?.profilePicUrl == null"
-        class="flex align-items-center justify-content-center pi pi-user h-10rem w-10rem border-circle surface-100 shadow-6"
+        [class]="'flex align-items-center justify-content-center pi pi-user h-10rem w-10rem border-circle surface-100 shadow-6 ' + getRoleClass()"
         style="font-size: 6rem">
-        <i shape="circle" class=""></i>
+        <i shape="circle"></i>
       </div>
 
       <img *ngIf="user?.profilePicUrl != null" [src]="user?.profilePicUrl"
-        class="h-10rem w-10rem border-circle surface-100 shadow-6" />
+        [class]="'h-10rem w-10rem border-circle surface-100 shadow-6 ' + getRoleClass()" />
 
     </div>
 

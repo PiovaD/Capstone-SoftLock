@@ -1,1 +1,29 @@
+::ng-deep p-avatar {
+    div {
 
+        &.dev {
+            border: 1px solid var(--yellow-700);
+
+        }
+        &.admin {
+            border: 1px solid var(--cyan-800);
+
+        }
+        &.press {
+            border: 1px solid var(--teal-600);
+
+        }
+        &.influencer {
+            border: 1px solid var(--orange-700);
+
+        }
+        &.gamer {
+            border: 1px solid var(--primary-color);
+
+        }
+        &.user {
+            border: 1px solid var(--surface-300);
+
+        }
+    }
+}

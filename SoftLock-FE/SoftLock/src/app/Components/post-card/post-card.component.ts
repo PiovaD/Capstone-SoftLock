@@ -6,6 +6,7 @@ import { IAnswer } from 'src/app/Models/posts/ianswer';
 import { IPost } from 'src/app/Models/posts/ipost';
 import { IReview } from 'src/app/Models/posts/ireview';
 import { UserAuthRes } from 'src/app/Models/users/auth-res';
+import { IUser } from 'src/app/Models/users/iuser';
 import { ValidatorService } from 'src/app/Models/validator.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { PostService } from 'src/app/Services/post.service';
@@ -184,6 +185,10 @@ export class PostCardComponent implements OnInit {
     this.router.navigateByUrl('/game', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl])
     })
+  }
+
+  getRoleClass(user: IUser): string {
+    return this.authService.getClassByUserRole(user)
   }
 
 }

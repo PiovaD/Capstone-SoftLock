@@ -4,7 +4,7 @@
 
   <div class="flex flex-column">
     <section class="flex-1">
-      <p-divider [align]="'center'"> <span class="p-2">Questions</span> </p-divider>
+      <p-divider [align]="'center'"> <span class="p-2 text-lg select-none">TOP QUESTIONS</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
         <app-post-card *ngFor="let post of questions | slice:0:6" [post]="post"
@@ -13,7 +13,7 @@
     </section>
 
     <section class="flex-1">
-      <p-divider [align]="'center'"> <span class="p-2">Reviews</span> </p-divider>
+      <p-divider [align]="'center'"> <span class="p-2 text-lg select-none">TOP REVIEWS</span> </p-divider>
 
       <div class="flex flex-wrap align-items-stretch">
         <app-post-card *ngFor="let post of reviews | slice:0:6" [post]="post"

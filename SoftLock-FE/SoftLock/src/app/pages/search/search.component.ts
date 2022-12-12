@@ -64,14 +64,17 @@ export class SearchComponent implements OnInit {
       .subscribe({
         next: () => this.creating = false,
         complete: () => this.router.navigate(['/game/' + game.slug]),
-        error: () => {
-          this.gameService.addFormIgdbGame(game.igdbID)
-            .subscribe(() => {
-              this.creating = false
-              this.router.navigate(['/game/' + game.slug])
-            })
+        error: (err) => {
+          if (err.status == 404) {
+            this.gameService.addFormIgdbGame(game.igdbID)
+              .subscribe(() => {
+                this.creating = false
+                this.router.navigate(['/game/' + game.slug])
+              })
+          }
         }
       })
+
 
   }
 

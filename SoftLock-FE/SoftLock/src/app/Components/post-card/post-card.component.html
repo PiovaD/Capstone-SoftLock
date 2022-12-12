@@ -62,13 +62,14 @@
       </div>
 
       <div class="flex justify-content-end text-right">
-        <span class="cursor-pointer flex align-items-center h-3rem" [routerLink]="'/profile/'+post.user.username">
+        <span class="cursor-pointer flex align-items-center h-3rem"
+        [routerLink]="'/profile/'+post.user.username">
           {{post.user.username}}
 
           <p-avatar *ngIf=" post.user.profilePicUrl != null" [image]="post.user.profilePicUrl || '' "
-            styleClass="ml-2  w-2rem h-2rem" size="large" shape="circle"></p-avatar>
+            [styleClass]="'ml-2 w-2rem h-2rem '+ getRoleClass(post.user)" size="large" shape="circle"></p-avatar>
 
-          <p-avatar *ngIf="post.user.profilePicUrl == null" icon="pi pi-user" styleClass="ml-2 w-2rem h-2rem"
+          <p-avatar *ngIf="post.user.profilePicUrl == null" icon="pi pi-user" [styleClass]="'ml-2 w-2rem h-2rem ' + getRoleClass(post.user)"
             size="large" shape="circle"></p-avatar>
         </span>
 

@@ -67,4 +67,10 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
     }
   }
 
+  getRoleClass(): string {
+    if (this.user)
+    return this.authServ.getClassByUserRole(this.user)
+    return ""
+  }
+
 }

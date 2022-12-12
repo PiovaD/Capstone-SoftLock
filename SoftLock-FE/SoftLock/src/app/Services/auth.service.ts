@@ -42,4 +42,27 @@ export class AuthService {
     );
   }
 
+  getClassByUserRole(user: IUser): string {
+    let type: string = ""
+    for (let role of user.roles) {
+      if (role.roleType.toString() == "ROLE_DEV") {
+        type = "dev"
+        break;
+      }
+
+      if (role.roleType.toString() == "ROLE_ADMIN") {
+        type = "admin"
+      } else if (type != "admin" && role.roleType.toString() == "ROLE_PRESS") {
+        type = "press"
+      } else if (type != "admin" && type != "press" && role.roleType.toString() == "ROLE_INFLUENCER") {
+        type = "influencer"
+      } else if ((type == "user" || type == "") && role.roleType.toString() == "ROLE_GAMER") {
+        type = "gamer"
+      } else if (type == "" && role.roleType.toString() == "ROLE_USER") {
+        type = "user"
+      }
+    }
+    return type
+  }
+
 }
