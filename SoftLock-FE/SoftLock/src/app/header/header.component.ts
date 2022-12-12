@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../Services/auth.service';
 import { UserAuthRes } from '../Models/users/auth-res';
@@ -50,14 +50,8 @@ export class HeaderComponent implements OnInit {
   }
 
   search() {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        s: this.value
-      }
-    }
-
-    this.router.navigate(['/search'],  {
-      queryParams: {q : this.value}
+    this.router.navigate(['/search'], {
+      queryParams: { q: this.value }
     });
 
   }

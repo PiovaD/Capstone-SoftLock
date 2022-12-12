@@ -13,11 +13,13 @@ import { AuthInterceptor } from './Services/auth.interceptor';
 import { PostCardModule } from './Components/post-card/post-card.module';
 import { GameCarouselModule } from './Components/game-carousel/game-carousel.module';
 import { HeaderModule } from './header/header.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
