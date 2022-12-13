@@ -58,7 +58,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/users/new")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,  "/api/users", "/api/games", "/api/**/pageable")
+                .antMatchers(HttpMethod.GET, "/api/users", "/api/games", "/api/**/pageable")
                 .permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/**/**")
                 .fullyAuthenticated()

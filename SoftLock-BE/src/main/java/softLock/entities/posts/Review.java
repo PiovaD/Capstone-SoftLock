@@ -19,7 +19,7 @@ public class Review extends Post {
     public Review(User user, Game game, String title, String text, int vote) {
         super(user, game, title, text);
 
-        this.vote = Math.min(Math.max(vote,0), 10);
-
+        this.vote = Math.min(Math.max(vote, 0), 10);
     }
+
 }

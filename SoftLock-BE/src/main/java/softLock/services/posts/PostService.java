@@ -22,12 +22,18 @@ public class PostService {
     @Autowired
     UserService userService;
 
+    /**
+     * @param post new post
+     * @return post saved in the DB
+     */
     private Post save(Post post) {
         return rep.save(post);
     }
 
     /**
      * Get All Posts, return an iterable of Post
+     *
+     * @return All posts in the DB
      */
     public Iterable<Post> getAllPosts() {
         return rep.findAll();
@@ -35,6 +41,9 @@ public class PostService {
 
     /**
      * Get All Posts, return a pageable of post for lighter payloads
+     *
+     * @param p Pageable(page, size, sort)
+     * @return The posts in the DB paginated
      */
     public Page<Post> getAllPostsPageable(Pageable p) {
         return rep.findAll(p);
@@ -42,6 +51,9 @@ public class PostService {
 
     /**
      * Find by id, if id is non-existent throws an exception
+     *
+     * @param id Post ID
+     * @return The corresponding post
      */
     public Post findById(Long id) throws ByIdNotFoundException {
         Optional<Post> found = rep.findById(id);
@@ -51,6 +63,10 @@ public class PostService {
         throw new ByIdNotFoundException("Post", id);
     }
 
+    /**
+     * @param titleSlug The slug of the post title
+     * @return The corresponding post
+     */
     public Post findByTitleSlug(String titleSlug) throws ByNameNotFoundException {
         Optional<Post> post = rep.findByTitleSlugIgnoreCase(titleSlug);
         if (post.isPresent()) {
@@ -59,24 +75,44 @@ public class PostService {
         throw new ByNameNotFoundException("Post", titleSlug);
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All posts that refer to the game passed as a parameter
+     */
     public Iterable<Post> findByGameId(Long gameId) {
         return rep.findByGameId(gameId);
     }
 
+    /**
+     * @param userId User ID
+     * @return All posts that refer to the user passed as a parameter
+     */
     public Iterable<Post> findByUserId(Long userId) {
         return rep.findByUserId(userId);
     }
 
+    /**
+     * @param title posts title
+     * @return All posts that have a similar title
+     */
     public Iterable<Post> findByTitle(String title) {
         return rep.findByTitleContainsIgnoreCase(title);
     }
 
+    /**
+     * @param gameName Game name
+     * @param title    Post title
+     * @return All posts that meet the parameters
+     */
     public Iterable<Post> searchByGameNameAndTitle(String gameName, String title) {
         return rep.findByGameNameContainsIgnoreCaseAndTitleContainsIgnoreCase(gameName, title);
     }
 
-    //todo up down vote
-
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who cast the vote
+     * @return The entity updated in the DB
+     */
     public Post addUpVote(Long postID, Long userID) throws ByIdNotFoundException {
         Post post = findById(postID);
         User user = userService.findById(userID);
@@ -92,6 +128,12 @@ public class PostService {
         return rep.save(post);
     }
 
+
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who cast the vote
+     * @return The entity updated in the DB
+     */
     public Post addDownVote(Long postID, Long userID) throws ByIdNotFoundException {
         Post post = findById(postID);
         User user = userService.findById(userID);
@@ -107,6 +149,11 @@ public class PostService {
         return rep.save(post);
     }
 
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who removed the vote
+     * @return The entity updated in the DB
+     */
     public Post removeVote(Long postID, Long userID) throws ByIdNotFoundException {
         Post post = findById(postID);
         User user = userService.findById(userID);
@@ -120,6 +167,9 @@ public class PostService {
 
     /**
      * throws IllegalArgumentException
+     *
+     * @param post The post to delete
+     * @return string with response
      */
     public String deletePost(Post post) throws IllegalArgumentException {
         rep.deleteById(post.getId());

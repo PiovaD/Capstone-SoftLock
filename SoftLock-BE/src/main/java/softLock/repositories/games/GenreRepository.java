@@ -23,6 +23,4 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
             where upper(g.name) like upper(concat('%', ?1, '%')) or upper(g.slug) like upper(concat('%', ?2, '%')) or g.igdbID = ?3""")
     Iterable<Genre> findByNameOrSlugOrIgdbID(@Nullable String name, @Nullable String slug, @Nullable Long igdbID);
 
-
-
 }

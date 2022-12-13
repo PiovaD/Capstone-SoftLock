@@ -22,5 +22,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             where upper(genres.name) like upper(concat('%', ?1, '%')) or upper(platforms.abbreviation) like upper(concat('%', ?2, '%'))""")
     Set<Game> findByGenreOrPlatform(@Nullable String genresName, @Nullable String platformsAbbreviation);
 
-
 }

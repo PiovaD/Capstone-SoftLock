@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import softLock.entities.games.Platform;
 import softLock.exceptions.ByIdNotFoundException;
 import softLock.exceptions.ByNameNotFoundException;
@@ -23,11 +24,18 @@ public class PlatformController {
 
     /*---------------------GET---------------------*/
 
+    /**
+     * @return All platforms in the DB
+     */
     @GetMapping("")
     public ResponseEntity<Iterable<Platform>> getAllPlatforms() {
         return new ResponseEntity<>(serv.getAllPlatforms(), HttpStatus.OK);
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The platforms in the DB paginated
+     */
     @GetMapping("/pageable")
     public ResponseEntity<Page<Platform>> getAllPlatformsPageable(Pageable p) {
         Page<Platform> foundAll = serv.getAllPlatformsPageable(p);
@@ -39,6 +47,10 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param id Platform ID
+     * @return The corresponding platform
+     */
     @GetMapping("/id")
     public ResponseEntity<Platform> findById(@RequestParam(name = "id") Long id) {
         try {
@@ -49,6 +61,10 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param id Platform IGDB ID (the ID of the external DB)
+     * @return The corresponding platform
+     */
     @GetMapping("/igdb-id")
     public ResponseEntity<Platform> findByIGDBId(@RequestParam(name = "id") Long id) {
         try {
@@ -63,6 +79,10 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param name The exact name of the platform
+     * @return The corresponding platform
+     */
     @GetMapping("/exact-name")
     public ResponseEntity<Platform> findByExactName(@RequestParam(name = "name") String name) {
         try {
@@ -73,6 +93,10 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param name The abbreviation of the platform
+     * @return The corresponding platform
+     */
     @GetMapping("/abbreviation")
     public ResponseEntity<Platform> findByAbbreviation(@RequestParam(name = "name") String name) {
         try {
@@ -83,6 +107,10 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param slug The slug of the platform
+     * @return The corresponding platform
+     */
     @GetMapping("/platform/{slug}")
     public ResponseEntity<Platform> findBySlug(@PathVariable("slug") String slug) {
         try {
@@ -93,9 +121,16 @@ public class PlatformController {
         }
     }
 
+    /**
+     * @param name         platform name
+     * @param slug         platform slug
+     * @param abbreviation platform abbreviation
+     * @param igdbID       platform external API ID
+     * @return All platforms that meet the parameters
+     */
     @GetMapping("/find")
     public ResponseEntity<Iterable<Platform>> searchPlatforms(
-            @RequestParam(name = "name",required = false) String name,
+            @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "slug", required = false) String slug,
             @RequestParam(name = "abbreviation", required = false) String abbreviation,
             @RequestParam(name = "igdbID", required = false) Long igdbID

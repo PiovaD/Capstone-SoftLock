@@ -29,6 +29,9 @@ public class ReviewService {
 
     /**
      * Method to save and persist in db a Post entity
+     *
+     * @param review New review
+     * @return review saved in the DB
      */
     public Review save(Review review) throws ByIdNotFoundException {
 
@@ -41,11 +44,12 @@ public class ReviewService {
         );
 
         return rep.save(newReview);
-
     }
 
     /**
      * Get All Reviews, return an iterable of Review
+     *
+     * @return All Review in the DB
      */
     public Iterable<Review> getAllReviews() {
         return rep.findAll();
@@ -53,11 +57,18 @@ public class ReviewService {
 
     /**
      * Get All Reviews, return a pageable of review for lighter payloads
+     *
+     * @param p Pageable(page, size, sort)
+     * @return The Reviews in the DB paginated
      */
     public Page<Review> getAllReviewsPageable(Pageable p) {
         return rep.findAll(p);
     }
 
+    /**
+     * @param id Review ID
+     * @return The corresponding Review
+     */
     public Review findById(Long id) throws ByIdNotFoundException {
         Optional<Review> res = rep.findById(id);
         if (res.isPresent()) {
@@ -66,30 +77,50 @@ public class ReviewService {
         throw new ByIdNotFoundException("Review", id);
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All reviews that refer to the game passed as a parameter
+     */
     public Iterable<Integer> getReviewsVoteByGameId(Long gameId) {
         return rep.getReviewsVoteByGameId(gameId);
     }
 
+    /**
+     * @param userId User ID
+     * @return All Reviews that refer to the user passed as a parameter
+     */
     public Iterable<Review> findByUserId(Long userId) {
         return rep.findByUserId(userId);
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All Reviews that refer to the game passed as a parameter
+     */
     public Iterable<Review> findByGameId(Long gameId) {
         return rep.findByGameId(gameId);
     }
 
+    /**
+     * @param title The title of the Review
+     * @return All Reviews that have a similar title
+     */
     public Iterable<Review> finByTitle(String title) {
         return rep.findByTitle(title);
     }
 
-    public Review update(Review updateReview) throws ByIdNotFoundException {
-        Review newRev = findById(updateReview.getId());
+    /**
+     * @param updatedReview Updated review
+     * @return The entity updated in the DB
+     */
+    public Review update(Review updatedReview) throws ByIdNotFoundException {
+        Review newRev = findById(updatedReview.getId());
 
-        newRev.setGame(gameService.findById(updateReview.getGame().getId()));
-        newRev.setTitle(updateReview.getTitle());
-        newRev.setTitleSlug(updateReview.getTitle().toLowerCase().replaceAll("\\s", "-"));
-        newRev.setText(updateReview.getText());
-        newRev.setVote(updateReview.getVote());
+        newRev.setGame(gameService.findById(updatedReview.getGame().getId()));
+        newRev.setTitle(updatedReview.getTitle());
+        newRev.setTitleSlug(updatedReview.getTitle().toLowerCase().replaceAll("\\s", "-"));
+        newRev.setText(updatedReview.getText());
+        newRev.setVote(updatedReview.getVote());
 
         return rep.save(newRev);
     }

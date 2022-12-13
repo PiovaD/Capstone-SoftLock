@@ -14,5 +14,4 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     Set<Answer> findByGameId(Long id);
 
-
 }

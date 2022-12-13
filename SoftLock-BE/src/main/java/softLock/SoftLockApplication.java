@@ -9,8 +9,7 @@ public class SoftLockApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SoftLockApplication.class, args);
-		System.out.println("DAJE");
-
+		System.out.println("Ready");
 	}
 
 }

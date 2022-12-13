@@ -21,21 +21,25 @@ public class SetupConfig {
     public Role roleUser() {
         return new Role(RoleType.ROLE_USER);
     }
+
     @Bean(name = "rGamer")
     @Scope("singleton")
     public Role roleGamer() {
         return new Role(RoleType.ROLE_GAMER);
     }
+
     @Bean(name = "rPress")
     @Scope("singleton")
     public Role rolePress() {
         return new Role(RoleType.ROLE_PRESS);
     }
+
     @Bean(name = "rInfluencer")
     @Scope("singleton")
     public Role roleInfluencer() {
         return new Role(RoleType.ROLE_INFLUENCER);
     }
+
     @Bean(name = "rDev")
     @Scope("singleton")
     public Role roleDev() {
@@ -45,7 +49,7 @@ public class SetupConfig {
     @Bean(name = "user1")
     @Scope("singleton")
     public User user1() {
-        User u = new User("ajeje", "Aldo", "Baglio", "dexter@garolfo.cops", "test");
+        User u = new User("SuperDev", "dev@mail.com", "Soft", "Lock", "Admin1");
         u.getRoles().add(roleDev());
         u.getRoles().add(roleAdmin());
         return u;

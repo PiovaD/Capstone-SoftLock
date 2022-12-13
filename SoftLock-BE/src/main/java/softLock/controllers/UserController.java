@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import softLock.entities.users.Role;
 import softLock.entities.users.RoleType;
 import softLock.entities.users.User;
@@ -16,8 +17,6 @@ import softLock.exceptions.ByNameNotFoundException;
 import softLock.exceptions.ByRoleFoundException;
 import softLock.services.users.RoleService;
 import softLock.services.users.UserService;
-
-import java.util.Set;
 
 @Slf4j
 @RestController
@@ -33,16 +32,26 @@ public class UserController {
 
     /*---------------------GET---------------------*/
 
+    /**
+     * @return All roles in the DB
+     */
     @GetMapping("roles")
     public ResponseEntity<Iterable<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * @return All users in the DB
+     */
     @GetMapping("")
     public ResponseEntity<Iterable<User>> getAllUsers() {
         return new ResponseEntity<>(serv.getAllUsers(), HttpStatus.OK);
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The users in the DB paginated
+     */
     @GetMapping("/pageable")
     public ResponseEntity<Page<User>> getAllUsersPageable(Pageable p) {
         Page<User> foundAll = serv.getAllUsersPageable(p);
@@ -54,6 +63,10 @@ public class UserController {
         }
     }
 
+    /**
+     * @param id User ID
+     * @return The corresponding user
+     */
     @GetMapping("/id")
     public ResponseEntity<User> findById(@RequestParam(name = "id") Long id) {
         try {
@@ -64,6 +77,10 @@ public class UserController {
         }
     }
 
+    /**
+     * @param username User username
+     * @return The corresponding user
+     */
     @GetMapping("/username")
     public ResponseEntity<User> findByUsername(@RequestParam(name = "username") String username) {
         try {
@@ -76,6 +93,10 @@ public class UserController {
 
     /*---------------------POST---------------------*/
 
+    /**
+     * @param user New User to add
+     * @return The entity saved in the DB
+     */
     @PostMapping("/new")
     public ResponseEntity<User> createNewUser(@RequestBody User user) {
         try {
@@ -88,6 +109,12 @@ public class UserController {
 
     /*---------------------PUT---------------------*/
 
+    /**
+     * update all parameters except passwords and roles
+     *
+     * @param updatedUser Updated user
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
         try {
@@ -103,6 +130,12 @@ public class UserController {
         }
     }
 
+    /**
+     * just update the password
+     *
+     * @param user Updated user
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update-password")//TODO sicurezza login utente tramite jwt
     public ResponseEntity<User> updatePassword(@RequestBody User user) {
         try {
@@ -118,6 +151,12 @@ public class UserController {
         }
     }
 
+    /**
+     * just update the profile pic
+     *
+     * @param user Updated user
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update-profile-pic")
     public ResponseEntity<User> updateProfilePic(@RequestBody User user) {
         try {
@@ -133,6 +172,12 @@ public class UserController {
         }
     }
 
+    /**
+     * Updates the roles based on the set present in the updated user
+     *
+     * @param user Update user
+     * @return The entity updated in the DB
+     */
     @PutMapping("/set-roles")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN')")
     public ResponseEntity<User> setRoles(@RequestBody User user) {
@@ -149,6 +194,13 @@ public class UserController {
         }
     }
 
+    /**
+     * Adds only one role
+     *
+     * @param rt   Role name
+     * @param user The reference user
+     * @return The entity updated in the DB
+     */
     @PutMapping("/add-role/{rt}")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN')")
     public ResponseEntity<User> updateAddRole(@PathVariable RoleType rt, @RequestBody User user) {
@@ -167,6 +219,13 @@ public class UserController {
 
     /*---------------------DELETE---------------------*/
 
+    /**
+     * Remove only one role
+     *
+     * @param rt   Role name
+     * @param user The reference user
+     * @return The entity updated in the DB
+     */
     @DeleteMapping("/remove-role/{rt}")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN')")
     public ResponseEntity<User> deleteRemoveRole(@PathVariable RoleType rt, @RequestBody User user) {
@@ -183,6 +242,10 @@ public class UserController {
         }
     }
 
+    /**
+     * @param user The user to delete
+     * @return string with response
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<String> delete(@RequestBody User user) {
         try {

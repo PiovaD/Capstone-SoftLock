@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 import softLock.security.JwtUtils;
 import softLock.security.details.UserDetailsImpl;
 import softLock.security.login.LoginRequest;
@@ -35,11 +36,14 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * @param loginRequest {"username", "password"}
+     * @return LoginResponse
+     */
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         try {
-
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -59,6 +63,7 @@ public class AuthController {
 
         } catch (DisabledException | LockedException e) {
             return new ResponseEntity<>("User disabled", HttpStatus.FORBIDDEN);
+
         }
     }
 }

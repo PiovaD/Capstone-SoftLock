@@ -15,21 +15,23 @@ import softLock.services.users.UserService;
 @Slf4j
 public class SetupRunner implements CommandLineRunner {
     AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SetupConfig.class);
+
     @Autowired
     RoleService rs;
+
     @Autowired
     UserService us;
+
     @Autowired
     IgdbHelper igdbHelper;
 
     @Override
     public void run(String... args) throws Exception {
         log.warn("START SETUP RUNNER");
-        // igdbHelper.gamesFiller();
-        // createData();
+        //igdbHelper.gamesFiller();
+        //createData();
         log.warn("END SETUP RUNNER");
     }
-
 
     private void createData() {
 

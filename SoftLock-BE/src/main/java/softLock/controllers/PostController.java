@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import softLock.entities.posts.Answer;
 import softLock.entities.posts.Post;
 import softLock.entities.posts.Question;
@@ -38,26 +39,42 @@ public class PostController {
     @Autowired
     ReviewService reviewService;
 
+    /**
+     * @return All posts in the DB
+     */
     @GetMapping("")
     public ResponseEntity<Iterable<Post>> getAllPosts() {
         return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
     }
 
+    /**
+     * @return All questions in the DB
+     */
     @GetMapping("/questions")
     public ResponseEntity<Iterable<Question>> getAllQuestions() {
         return new ResponseEntity<>(questionService.getAllQuestions(), HttpStatus.OK);
     }
 
+    /**
+     * @return All answers in the DB
+     */
     @GetMapping("/answers")
     public ResponseEntity<Iterable<Answer>> getAllAnswers() {
         return new ResponseEntity<>(answerService.getAllAnswers(), HttpStatus.OK);
     }
 
+    /**
+     * @return All reviews in the DB
+     */
     @GetMapping("/reviews")
     public ResponseEntity<Iterable<Review>> getAllReviews() {
         return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The posts in the DB paginated
+     */
     @GetMapping("/pageable")
     public ResponseEntity<Page<Post>> getAllPostsPageable(Pageable p) {
         Page<Post> foundAll = postService.getAllPostsPageable(p);
@@ -69,6 +86,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The questions in the DB paginated
+     */
     @GetMapping("/questions-pageable")
     public ResponseEntity<Page<Question>> getAllQuestionsPageable(Pageable p) {
         Page<Question> foundAll = questionService.getAllQuestionsPageable(p);
@@ -80,6 +101,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The answers in the DB paginated
+     */
     @GetMapping("/answers-pageable")
     public ResponseEntity<Page<Answer>> getAllAnswerPageable(Pageable p) {
         Page<Answer> foundAll = answerService.getAllAnswersPageable(p);
@@ -91,6 +116,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param p Pageable(page, size, sort)
+     * @return The reviews in the DB paginated
+     */
     @GetMapping("/reviews-pageable")
     public ResponseEntity<Page<Review>> getAllReviewPageable(Pageable p) {
         Page<Review> foundAll = reviewService.getAllReviewsPageable(p);
@@ -102,6 +131,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param id Post ID
+     * @return The corresponding post
+     */
     @GetMapping("/id")
     public ResponseEntity<Post> findById(@RequestParam(name = "id") Long id) {
         try {
@@ -112,6 +145,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param titleSlug The slug of the post title
+     * @return The corresponding post
+     */
     @GetMapping("/title/{title-slug}")
     public ResponseEntity<Post> findByTitleSlug(@PathVariable("title-slug") String titleSlug) {
         try {
@@ -122,6 +159,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All posts that refer to the game passed as a parameter
+     */
     @GetMapping("/game-id")
     public ResponseEntity<Iterable<Post>> findByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
@@ -131,6 +172,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All questions that refer to the game passed as a parameter
+     */
     @GetMapping("questions/game-id")
     public ResponseEntity<Iterable<Question>> findQuestionsByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
@@ -140,6 +185,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All answers that refer to the game passed as a parameter
+     */
     @GetMapping("answers/game-id")
     public ResponseEntity<Iterable<Answer>> findAnswersByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
@@ -149,6 +198,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameId The game ID
+     * @return All reviews that refer to the game passed as a parameter
+     */
     @GetMapping("reviews/game-id")
     public ResponseEntity<Iterable<Review>> findReviewsByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
@@ -158,8 +211,10 @@ public class PostController {
         }
     }
 
-
-
+    /**
+     * @param userId User ID
+     * @return All posts that refer to the user passed as a parameter
+     */
     @GetMapping("/user-id")
     public ResponseEntity<Iterable<Post>> findByUserId(@RequestParam(name = "user-id") Long userId) {
         try {
@@ -169,6 +224,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param title The title of the post
+     * @return All posts that have a similar title
+     */
     @GetMapping("/title")
     public ResponseEntity<Iterable<Post>> findByTitle(@RequestParam(name = "title") String title) {
         try {
@@ -178,6 +237,11 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameName Game name
+     * @param title    Post title
+     * @return All posts that meet the parameters
+     */
     @GetMapping("/search")
     public ResponseEntity<Iterable<Post>> searchByGameNameAndTitle(@RequestParam(name = "game-name") String gameName, @RequestParam(name = "title") String title) {
         try {
@@ -187,6 +251,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param title question title
+     * @return All questions that have a similar title
+     */
     @GetMapping("/search/question-title")
     public ResponseEntity<Iterable<Question>> searchByQuestionTitle(@RequestParam(name = "title") String title) {
         try {
@@ -196,6 +264,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param title reviews title
+     * @return All reviews that have a similar title
+     */
     @GetMapping("/search/review-title")
     public ResponseEntity<Iterable<Review>> searchByReviewTitle(@RequestParam(name = "title") String title) {
         try {
@@ -205,7 +277,10 @@ public class PostController {
         }
     }
 
-
+    /**
+     * @param userId User ID
+     * @return All questions with the same user id
+     */
     @GetMapping("/questions/user-id")
     public ResponseEntity<Iterable<Question>> findQuestionByUserId(@RequestParam(name = "user-id") Long userId) {
         try {
@@ -215,6 +290,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param userId User ID
+     * @return All answers with the same user id
+     */
     @GetMapping("/answers/user-id")
     public ResponseEntity<Iterable<Answer>> findAnswerByUserId(@RequestParam(name = "user-id") Long userId) {
         try {
@@ -224,6 +303,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param userId User ID
+     * @return All reviews with the same user id
+     */
     @GetMapping("/reviews/user-id")
     public ResponseEntity<Iterable<Review>> findReviewByUserId(@RequestParam(name = "user-id") Long userId) {
         try {
@@ -233,6 +316,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param gameId The game ID
+     * @return The review rating
+     */
     @GetMapping("/reviews-vote/game-id")
     public ResponseEntity<Iterable<Integer>> getReviewsByGameId(@RequestParam(name = "game-id") Long gameId) {
         try {
@@ -242,6 +329,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param questionId Question ID
+     * @return All the answers to the question
+     */
     @GetMapping("/answers/question")
     public ResponseEntity<Iterable<Answer>> findAnswerByQuestionId(@RequestParam(name = "question-id") Long questionId) {
         try {
@@ -253,6 +344,10 @@ public class PostController {
 
     /*---------------------POST---------------------*/
 
+    /**
+     * @param post New post to add
+     * @return The entity saved in the DB
+     */
     @PostMapping("/new-question")
     public ResponseEntity<Question> createNewQuestion(@RequestBody Question post) {
         try {
@@ -263,6 +358,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param post New answer to add
+     * @return The entity saved in the DB
+     */
     @PostMapping("/new-answer")
     public ResponseEntity<Answer> createNewAnswer(@RequestBody Answer post) {
         try {
@@ -273,6 +372,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param post New review to add
+     * @return The entity saved in the DB
+     */
     @PostMapping("/new-review")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'GAMER', 'PRESS', 'INFLUENCER' )")
     public ResponseEntity<Review> createNewReview(@RequestBody Review post) {
@@ -286,6 +389,10 @@ public class PostController {
 
     /*---------------------PUT---------------------*/
 
+    /**
+     * @param updatedAnswer Updated Answer
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update-answer")
     public ResponseEntity<Answer> updateAnswer(@RequestBody Answer updatedAnswer) {
         try {
@@ -301,6 +408,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param updatedQuestion Updated question
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update-question")
     public ResponseEntity<Question> updateQuestion(@RequestBody Question updatedQuestion) {
         try {
@@ -316,6 +427,10 @@ public class PostController {
         }
     }
 
+    /**
+     * @param updatedReview Updated review
+     * @return The entity updated in the DB
+     */
     @PutMapping("/update-review")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'GAMER', 'PRESS', 'INFLUENCER' )")
     public ResponseEntity<Review> updateReview(@RequestBody Review updatedReview) {
@@ -332,6 +447,11 @@ public class PostController {
         }
     }
 
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who cast the vote
+     * @return The entity updated in the DB
+     */
     @PutMapping("/up-vote/add/{post-id}/{user-id}")
     public ResponseEntity<Post> addUpVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
@@ -347,6 +467,11 @@ public class PostController {
         }
     }
 
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who cast the vote
+     * @return The entity updated in the DB
+     */
     @PutMapping("/down-vote/add/{post-id}/{user-id}")
     public ResponseEntity<Post> addDownVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
@@ -365,6 +490,11 @@ public class PostController {
 
     /*---------------------DELETE---------------------*/
 
+    /**
+     * @param postID Post ID
+     * @param userID The User ID of the user who removed the vote
+     * @return The entity updated in the DB
+     */
     @DeleteMapping("/vote/remove/{post-id}/{user-id}")
     public ResponseEntity<Post> removeUpVote(@PathVariable("post-id") Long postID, @PathVariable("user-id") Long userID) {
         try {
@@ -380,7 +510,10 @@ public class PostController {
         }
     }
 
-
+    /**
+     * @param post The post to delete
+     * @return string with response
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<String> delete(@RequestBody Post post) {
         try {

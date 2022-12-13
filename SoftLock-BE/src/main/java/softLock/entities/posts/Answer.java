@@ -24,9 +24,9 @@ public class Answer extends Post {
     private Question question;
 
     public Answer(Question question, User user, Game game, String text) {
-        super(user, game, null , text);
+        super(user, game, null, text);
 
         this.question = question;
-
     }
+
 }

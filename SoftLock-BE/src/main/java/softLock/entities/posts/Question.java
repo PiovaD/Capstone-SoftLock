@@ -16,7 +16,6 @@ public class Question extends Post {
 
     public Question(User user, Game game, String title, String text) {
         super(user, game, title, text);
-
     }
 
 }

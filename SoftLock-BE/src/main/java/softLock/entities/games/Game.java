@@ -23,7 +23,7 @@ public class Game {
     private Long igdbID;
     private String name;
     private String slug;
-    @Column(columnDefinition="TEXT", length = 510)
+    @Column(columnDefinition = "TEXT", length = 510)
     private String summary;
     private String imageID;
     private LocalDate releaseDate;

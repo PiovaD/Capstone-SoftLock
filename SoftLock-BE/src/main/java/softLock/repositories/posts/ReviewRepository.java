@@ -19,5 +19,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r where upper(r.title) like upper(concat('%', ?1, '%'))")
     Set<Review> findByTitle(String title);
 
-
 }

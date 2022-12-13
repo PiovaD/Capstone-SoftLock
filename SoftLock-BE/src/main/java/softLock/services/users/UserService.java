@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -30,6 +29,9 @@ public class UserService {
 
     /**
      * Method to save and persist in db a User entity
+     *
+     * @param user New User to add
+     * @return The entity saved in the DB
      */
     public User save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
@@ -39,6 +41,8 @@ public class UserService {
 
     /**
      * Get All Users, return an iterable of Users
+     *
+     * @return All users in the DB
      */
     public Iterable<User> getAllUsers() {
         return rep.findAll();
@@ -46,6 +50,9 @@ public class UserService {
 
     /**
      * Get All Users, return a pageable of users for lighter payloads
+     *
+     * @param p Pageable(page, size, sort)
+     * @return The users in the DB paginated
      */
     public Page<User> getAllUsersPageable(Pageable p) {
         return rep.findAll(p);
@@ -53,6 +60,9 @@ public class UserService {
 
     /**
      * Find by id, if id is non-existent throws an exception
+     *
+     * @param id User ID
+     * @return The corresponding user
      */
     public User findById(Long id) throws ByIdNotFoundException {
         Optional<User> found = rep.findById(id);
@@ -64,6 +74,9 @@ public class UserService {
 
     /**
      * Find by username, if username is non-existent throws an exception
+     *
+     * @param username User username
+     * @return The corresponding user
      */
     public User findByUsername(String username) throws ByNameNotFoundException {
         Optional<User> found = rep.findByUsernameAllIgnoreCase(username);
@@ -74,7 +87,10 @@ public class UserService {
     }
 
     /**
-     * update User
+     * update all parameters except passwords and roles
+     *
+     * @param updatedUser Updated user
+     * @return The entity updated in the DB
      */
     public User update(User updatedUser) throws ByIdNotFoundException {
         User oldUser = findById(updatedUser.getId());
@@ -89,6 +105,12 @@ public class UserService {
         return rep.save(oldUser);
     }
 
+    /**
+     * just update the password
+     *
+     * @param user Updated user
+     * @return The entity updated in the DB
+     */
     public User updatePassword(User user) throws ByIdNotFoundException {
         User oldUser = findById(user.getId());
 
@@ -97,6 +119,12 @@ public class UserService {
         return rep.save(oldUser);
     }
 
+    /**
+     * just update the profile pic
+     *
+     * @param user Updated user
+     * @return The entity updated in the DB
+     */
     public User updateProfilePic(User user) throws ByIdNotFoundException {
         User oldUser = findById(user.getId());
 
@@ -105,6 +133,13 @@ public class UserService {
         return rep.save(oldUser);
     }
 
+    /**
+     * Adds only one role
+     *
+     * @param roleType Role type
+     * @param user     The reference user
+     * @return The entity updated in the DB
+     */
     public User addRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {
         User oldUser = findById(user.getId());
 
@@ -119,7 +154,14 @@ public class UserService {
         return rep.save(oldUser);
     }
 
-    public User setRoles( User user) throws ByIdNotFoundException {
+
+    /**
+     * Updates the roles based on the set present in the updated user
+     *
+     * @param user Updated user
+     * @return The entity updated in the DB
+     */
+    public User setRoles(User user) throws ByIdNotFoundException {
         User oldUser = findById(user.getId());
 
         oldUser.setRoles(user.getRoles());
@@ -128,6 +170,13 @@ public class UserService {
 
     }
 
+    /**
+     * Remove only one role
+     *
+     * @param roleType   Role type
+     * @param user The reference user
+     * @return The entity updated in the DB
+     */
     public User removeRole(User user, RoleType roleType) throws ByIdNotFoundException, ByRoleFoundException {
         User oldUser = findById(user.getId());
 
@@ -144,6 +193,9 @@ public class UserService {
 
     /**
      * throws IllegalArgumentException
+     *
+     * @param user The user to delete
+     * @return string with response
      */
     public String deleteUser(User user) throws ByIdNotFoundException {
 
