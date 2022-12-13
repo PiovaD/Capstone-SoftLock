@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AvatarFormComponent } from './avatar-form.component';
 import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module';
 
-import {AvatarModule} from 'primeng/avatar';
+import { AvatarModule } from 'primeng/avatar';
 
 
 

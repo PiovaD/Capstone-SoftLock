@@ -3,7 +3,8 @@
 
   <ng-template let-game pTemplate="item">
 
-    <div class="bg-cyan-800 hover:bg-cyan-700 w-8rem sm:w-max mx-auto border-round cursor-pointer transition-all transition-duration-300 hover:shadow-8"
+    <div
+      class="bg-cyan-800 hover:bg-cyan-700 w-8rem sm:w-max mx-auto border-round cursor-pointer transition-all transition-duration-300 hover:shadow-8"
       [routerLink]="'/game/'+ game.slug">
       <img [id]="game.slug" class="w-8rem sm:w-12rem xl:w-18rem"
         [src]="'https://images.igdb.com/igdb/image/upload/t_cover_big/'+game.imageID+'.png'" [alt]="game.slug">

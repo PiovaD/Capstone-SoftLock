@@ -12,8 +12,8 @@
       </span>
 
       <span class="p-float-label field mb-5">
-        <p-password inputId="login-password" formControlName="password" inputStyleClass="w-full"
-          styleClass="w-full" [toggleMask]="true" [showClear]="true" [feedback]="false">
+        <p-password inputId="login-password" formControlName="password" inputStyleClass="w-full" styleClass="w-full"
+          [toggleMask]="true" [showClear]="true" [feedback]="false">
         </p-password>
 
         <label for="login-password">Password</label>
@@ -29,8 +29,9 @@
       <button pButton pRipple label="Login" icon="pi pi-user" class="w-full" [loading]="isLoading"></button>
 
       <div class="mt-6 text-center text-600">
-        Don't have an account? <a tabindex="0" class="font-medium text-blue-500" [routerLink]="'/registration'">Sign
-          up</a>
+        Don't have an account?
+        <a tabindex="0" class="font-medium text-blue-500" [routerLink]="'/registration'">Sign up</a>
+
       </div>
     </form>
   </div>

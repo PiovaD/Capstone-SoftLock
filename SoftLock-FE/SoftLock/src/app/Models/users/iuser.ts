@@ -10,4 +10,3 @@ export interface IUser {
   profilePicUrl: string | null;
   roles: IRole[];
 }
-

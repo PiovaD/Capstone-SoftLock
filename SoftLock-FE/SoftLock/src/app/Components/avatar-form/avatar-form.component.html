@@ -12,6 +12,7 @@
     <img *ngIf="avatarForm.controls['profilePicUrl'].value != null" [src]="avatarForm.controls['profilePicUrl'].value"
       class="h-10rem w-10rem border-circle surface-100 shadow-6" />
     <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded -mt-4" (click)="show()"></button>
+
   </div>
 
 </div>
@@ -20,27 +21,37 @@
   [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
   <div class="grid justify-content-center">
-    <div class="field-radiobutton col-12 sm:col-4 my-3 flex align-items-center justify-content-center sm:border-right-1 surface-border">
-      <p-radioButton name="avatar-pic" [value]="null" [(ngModel)]="gender" inputId="avtar-null" (click)="reset()"></p-radioButton>
+
+    <div
+      class="field-radiobutton col-12 sm:col-4 my-3 flex align-items-center justify-content-center sm:border-right-1 surface-border">
+      <p-radioButton name="avatar-pic" [value]="null" [(ngModel)]="gender" inputId="avtar-null"
+        (click)="reset()"></p-radioButton>
       <label for="avtar-null">No pic</label>
     </div>
-    <div class="field-radiobutton col-12 sm:col-4 my-3 flex align-items-center justify-content-center sm:border-right-1 surface-border">
+
+    <div
+      class="field-radiobutton col-12 sm:col-4 my-3 flex align-items-center justify-content-center sm:border-right-1 surface-border">
       <p-radioButton name="avatar-pic" value="male" [(ngModel)]="gender" inputId="avatar-male"></p-radioButton>
       <label for="avatar-male">Male</label>
     </div>
+
     <div class="field-radiobutton col-12 sm:col-4 my-3 flex align-items-center justify-content-center surface-border">
       <p-radioButton name="avatar-pic" value="female" [(ngModel)]="gender" inputId="avatar-female"></p-radioButton>
       <label for="avatar-female">Female</label>
     </div>
+
   </div>
 
-
   <div *ngIf="gender!=null" id="avatar-menu" class="grid justify-content-center">
-    <div *ngFor="let avatar of avatars[gender==null ? 'nopic': gender=='female' ? 'female' : 'male']" class="flex col-12 sm:col-6 md:col-4 xl:col-3 justify-content-center">
+
+    <div *ngFor="let avatar of avatars[gender==null ? 'nopic': gender=='female' ? 'female' : 'male']"
+      class="flex col-12 sm:col-6 md:col-4 xl:col-3 justify-content-center">
+
       <img [src]="'assets/Schmoes/'+gender+'/'+avatar +'.svg'"
         class="h-10rem w-10rem border-circle surface-100 shadow-6 cursor-pointer "
-        (click)="avatarSelect(gender, avatar)"/>
+        (click)="avatarSelect(gender, avatar)" />
     </div>
+
   </div>
 
 </p-dialog>

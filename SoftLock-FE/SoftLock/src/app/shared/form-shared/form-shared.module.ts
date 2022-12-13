@@ -13,7 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip'
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import {AutoFocusModule} from 'primeng/autofocus';
+import { AutoFocusModule } from 'primeng/autofocus';
 
 
 

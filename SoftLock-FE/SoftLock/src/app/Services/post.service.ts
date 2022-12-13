@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { API } from 'src/environments/environment';
 import { Page } from '../Models/page';
 import { IAnswer } from '../Models/posts/ianswer';
-import { IPost } from '../Models/posts/ipost';
 
 @Injectable({
   providedIn: 'root'

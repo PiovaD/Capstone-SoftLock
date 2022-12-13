@@ -9,7 +9,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { CardModule } from 'primeng/card';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { PostFormModule } from '../post-form/post-form.module';
 import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module';
@@ -19,7 +19,9 @@ import { FormSharedModule } from 'src/app/shared/form-shared/form-shared.module'
   declarations: [
     PostCardComponent
   ],
-  exports: [PostCardComponent],
+  exports: [
+    PostCardComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,

@@ -1,5 +1,5 @@
 import { IPost } from "./ipost";
 
-export interface IAnswer extends IPost{
+export interface IAnswer extends IPost {
   question: IPost
 }

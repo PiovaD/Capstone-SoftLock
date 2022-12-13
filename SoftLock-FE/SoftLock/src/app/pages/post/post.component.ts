@@ -15,7 +15,7 @@ import { UserService } from 'src/app/Services/user.service';
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
-  providers: [ MessageService]
+  providers: [MessageService]
 })
 export class PostComponent implements OnInit {
 
@@ -66,18 +66,18 @@ export class PostComponent implements OnInit {
 
   }
 
-  getUser(): void{
-    if(this.user){
+  getUser(): void {
+    if (this.user) {
       this.userService.getUserById(this.user?.id)
-      .subscribe(res => {
-        this.user = res
-        this.replyForm.setValue({
-          text: null,
-          user: this.user,
-          question: this.post,
-          game: this.post?.game
+        .subscribe(res => {
+          this.user = res
+          this.replyForm.setValue({
+            text: null,
+            user: this.user,
+            question: this.post,
+            game: this.post?.game
+          })
         })
-      })
     }
   }
 
@@ -86,7 +86,7 @@ export class PostComponent implements OnInit {
 
       this.postService.getAnswersByQuestionId(this.post.id)
         .subscribe({
-          next: (res) => this.answers = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 ),
+          next: (res) => this.answers = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date) ? -1 : 1),
           error: () => this.router.navigate(['/'])
         })
     }
@@ -101,22 +101,22 @@ export class PostComponent implements OnInit {
     console.log(this.replyForm.value)
 
     this.postService.createNewPost<IAnswer>("answer", this.replyForm.value)
-    .subscribe({
-      next: (res) => this.answers?.unshift(res),
-      error: (err) =>{
-        console.error('httpError', err);
-        this.isLoading = false;
-        err.status == 0 ?
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
-          :
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Reply failed, retry later' });
+      .subscribe({
+        next: (res) => this.answers?.unshift(res),
+        error: (err) => {
+          console.error('httpError', err);
+          this.isLoading = false;
+          err.status == 0 ?
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
+            :
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Reply failed, retry later' });
 
-        setTimeout(
-          () => {
-            this.messageService.clear()
-          }, 3000);
-      }
-    })
+          setTimeout(
+            () => {
+              this.messageService.clear()
+            }, 3000);
+        }
+      })
 
     this.display = false;
   }

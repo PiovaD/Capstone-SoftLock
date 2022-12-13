@@ -62,7 +62,7 @@ export class PostCardComponent implements OnInit {
   }
 
   isAnswer(post: IPost | IAnswer | IReview): post is IAnswer {
-    return (<IAnswer>this.post).question !== undefined;
+    return (<IAnswer>post).question !== undefined;
   }
 
   isUserPost(post: IPost | IAnswer | IReview): boolean {

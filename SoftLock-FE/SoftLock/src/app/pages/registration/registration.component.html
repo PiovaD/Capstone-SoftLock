@@ -7,7 +7,7 @@
 
     <p-divider></p-divider>
 
-    <form class="flex gap-5 flex-column-reverse md:flex-row" >
+    <form class="flex gap-5 flex-column-reverse md:flex-row">
 
       <div class="flex-auto p-fluid">
 
@@ -16,9 +16,10 @@
         <app-password-form [passwordForm]="registerForm"></app-password-form>
 
         <div class="flex justify-content-between  flex-wrap">
-          <button pButton pRipple label="Register Profile" class="w-auto mb-3" (click)="submitForm()" [loading]="isLoading" [disabled]="!registerForm.valid"></button>
+          <button pButton pRipple label="Register Profile" class="w-auto mb-3" (click)="submitForm()"
+            [loading]="isLoading" [disabled]="!registerForm.valid"></button>
 
-          <button pButton pRipple label="Reset" class="w-auto mb-3" (click)="resetForm()" ></button>
+          <button pButton pRipple label="Reset" class="w-auto mb-3" (click)="resetForm()"></button>
         </div>
       </div>
 

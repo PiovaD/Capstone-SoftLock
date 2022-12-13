@@ -65,7 +65,7 @@ export class AvatarFormComponent implements OnInit {
   avatarSelect(gender: string | null, avatar: string) {
     this.displayModal = false;
     this.avatarForm.controls["profilePicUrl"].markAsDirty();
-    this.avatarForm.controls["profilePicUrl"].setValue('assets/Schmoes/' + gender + '/' + avatar+'.svg');
+    this.avatarForm.controls["profilePicUrl"].setValue('assets/Schmoes/' + gender + '/' + avatar + '.svg');
   }
 
   reset() {

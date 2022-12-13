@@ -15,10 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let token = this.authSvc.getLoggedUser()?.token
 
-    if(token){
+    if (token) {
 
       let newRequest = request.clone({
-        headers: request.headers.append('Authorization','Bearer '+ token)
+        headers: request.headers.append('Authorization', 'Bearer ' + token)
       })
 
       return next.handle(newRequest);

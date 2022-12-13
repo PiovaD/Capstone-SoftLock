@@ -36,32 +36,32 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
 
-     if (this.validateForm.valid) {
-       this.isLoading = true;
+    if (this.validateForm.valid) {
+      this.isLoading = true;
       this.authService.login(this.validateForm.value).subscribe({
-         next: (res) => this.authService.saveAccess(res, this.validateForm.value.remember),
-         complete: () => this.router.navigate(['/']),
-         error: (err) => {
-           this.isLoading = false;
+        next: (res) => this.authService.saveAccess(res, this.validateForm.value.remember),
+        complete: () => this.router.navigate(['/']),
+        error: (err) => {
+          this.isLoading = false;
 
-           err.status == 403?
-           this.messageService.add({severity:'error', summary:'Error', detail:'User disabled'})
-           : this.messageService.add({severity:'error', summary:'Error', detail:'Login failed check the data'});
+          err.status == 403 ?
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User disabled' })
+            : this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login failed check the data' });
 
-           setTimeout(
+          setTimeout(
             () => {
               this.messageService.clear()
             }, 3000);
-          },
-       });
-     } else {
+        },
+      });
+    } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
-     }
+    }
   }
 }
 

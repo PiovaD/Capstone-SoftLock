@@ -8,8 +8,6 @@ import { PostService } from 'src/app/Services/post.service';
 import { IPost } from 'src/app/Models/posts/ipost';
 import { IAnswer } from 'src/app/Models/posts/ianswer';
 import { IReview } from 'src/app/Models/posts/ireview';
-import { SelectItem } from 'primeng/api';
-import { RoleType } from 'src/app/Models/users/role-type';
 import { IRole } from 'src/app/Models/users/irole';
 
 @Component({
@@ -57,8 +55,8 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
   }
 
   isAdmin(): boolean {
-    if(this.loggedUser){
-      return this.loggedUser.roles.find(role=> role == "ROLE_DEV" || role == "ROLE_ADMIN")? true : false;
+    if (this.loggedUser) {
+      return this.loggedUser.roles.find(role => role == "ROLE_DEV" || role == "ROLE_ADMIN") ? true : false;
     }
     return false;
   }

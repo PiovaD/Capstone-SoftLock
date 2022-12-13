@@ -35,9 +35,9 @@ export class GameCarouselComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.gameService.getAllGamesPaginate({page: 0,size: 10, sort: "releaseDate,desc",})
+    this.gameService.getAllGamesPaginate({ page: 0, size: 10, sort: "releaseDate,desc", })
       .subscribe(res => {
-       this.games = res.content;
+        this.games = res.content;
       })
 
 

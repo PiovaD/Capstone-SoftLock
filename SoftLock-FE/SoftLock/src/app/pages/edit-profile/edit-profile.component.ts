@@ -159,11 +159,11 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  confirmValidator = (control: FormControl) : { [s: string]: boolean } | null => {
+  confirmValidator = (control: FormControl): { [s: string]: boolean } | null => {
 
     if (control.value && control.value != this.passwordForm.controls['password'].value) {
 
-          console.info(control.value + " " + this.passwordForm.controls['password'].value)
+      console.info(control.value + " " + this.passwordForm.controls['password'].value)
       return { error: true };
     }
     return null;
@@ -228,33 +228,33 @@ export class EditProfileComponent implements OnInit {
     return !(this.loggedUser?.roles.includes("ROLE_DEV"));
   }
 
-  submitPassword():void{
-  this.userService.updateUserPassword(this.passwordForm.value)
-    .subscribe({
+  submitPassword(): void {
+    this.userService.updateUserPassword(this.passwordForm.value)
+      .subscribe({
 
-      next: () => this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Password updated' }),
+        next: () => this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Password updated' }),
 
-      complete: () => {
-        setTimeout(
-          () => {
-        this.location.back();
-          }, 1000);
-      },
+        complete: () => {
+          setTimeout(
+            () => {
+              this.location.back();
+            }, 1000);
+        },
 
-      error: (err) => {
-        console.error('httpError', err);
-        this.isLoading = false;
-        err.status == 0 ?
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
-          :
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Update failed check the data' });
+        error: (err) => {
+          console.error('httpError', err);
+          this.isLoading = false;
+          err.status == 0 ?
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Server error' })
+            :
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Update failed check the data' });
 
-        setTimeout(
-          () => {
-            this.messageService.clear()
-          }, 3000);
-      }
-    })
+          setTimeout(
+            () => {
+              this.messageService.clear()
+            }, 3000);
+        }
+      })
   }
 
 }

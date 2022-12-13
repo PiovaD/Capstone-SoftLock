@@ -47,9 +47,9 @@ export class PlatformService {
     return this.http.get<IPlatform>(API + 'platforms/platform/' + name);
   }
 
-  findByGeneresAndPlatform(params : platformParams): Observable<IPlatform[]> {
+  findByGeneresAndPlatform(params: platformParams): Observable<IPlatform[]> {
 
-    return this.http.get<IPlatform[]>(API + 'platforms/find', {params});
+    return this.http.get<IPlatform[]>(API + 'platforms/find', { params });
 
   }
 }

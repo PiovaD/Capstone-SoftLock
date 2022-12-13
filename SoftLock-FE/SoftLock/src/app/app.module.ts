@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import {DividerModule} from 'primeng/divider'
+import { DividerModule } from 'primeng/divider'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,11 +35,11 @@ import { FooterComponent } from './footer/footer.component';
   ],
   providers: [
     {
-    provide:HTTP_INTERCEPTORS,
-    useClass:AuthInterceptor,
-    multi: true
-  }
-],
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,7 +29,7 @@ export class ReviewsComponent implements OnInit {
 
       if (res["gameSlug"] == undefined) {
         this.postService.getAllPosts<IReview>('reviews')
-          .subscribe(res => this.reviews = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1))
+          .subscribe(res => this.reviews = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date) ? -1 : 1))
 
       } else {
         this.gameService.getGameBySlug(res['gameSlug'])
@@ -47,7 +47,7 @@ export class ReviewsComponent implements OnInit {
     if (this.game) {
       this.postService.getByGameId<IReview>(this.game.id, '/reviews')
         .subscribe(res => {
-          this.reviews = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 )
+          this.reviews = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date) ? -1 : 1)
           this.title = `ALL REVIEWS OF: ${this.game?.name} `
         })
     }

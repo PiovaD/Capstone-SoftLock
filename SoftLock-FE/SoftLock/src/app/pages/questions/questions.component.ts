@@ -29,7 +29,7 @@ export class QuestionsComponent implements OnInit {
 
       if (res["gameSlug"] == undefined) {
         this.postService.getAllPosts<IPost>('questions')
-          .subscribe(res => this.questions = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1))
+          .subscribe(res => this.questions = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date) ? -1 : 1))
 
       } else {
         this.gameService.getGameBySlug(res['gameSlug'])
@@ -43,14 +43,13 @@ export class QuestionsComponent implements OnInit {
     })
   }
 
-  getPostByGame(): void{
-    if (this.game){
-      this.postService.getByGameId<IPost>(this.game.id,'/questions')
-      .subscribe(res =>
-        {
-        this.questions = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date)? -1 : 1 )
-        this.title = `ALL QUESTION OF: ${this.game?.name} `
-      })
+  getPostByGame(): void {
+    if (this.game) {
+      this.postService.getByGameId<IPost>(this.game.id, '/questions')
+        .subscribe(res => {
+          this.questions = res.sort((a, b) => (a.upVote.length - a.downVote.length) > (b.upVote.length - b.downVote.length) || new Date(a.date) > new Date(b.date) ? -1 : 1)
+          this.title = `ALL QUESTION OF: ${this.game?.name} `
+        })
     }
   }
 }
