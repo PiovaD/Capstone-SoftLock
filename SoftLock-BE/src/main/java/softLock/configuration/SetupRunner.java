@@ -28,8 +28,8 @@ public class SetupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.warn("START SETUP RUNNER");
-        //igdbHelper.gamesFiller();
-        //createData();
+        igdbHelper.gamesFiller();
+        createData();
         log.warn("END SETUP RUNNER");
     }
 
