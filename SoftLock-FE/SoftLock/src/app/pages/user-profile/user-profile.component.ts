@@ -9,13 +9,14 @@ import { IPost } from 'src/app/Models/posts/ipost';
 import { IAnswer } from 'src/app/Models/posts/ianswer';
 import { IReview } from 'src/app/Models/posts/ireview';
 import { IRole } from 'src/app/Models/users/irole';
+import { RoleType } from 'src/app/Models/users/role-type';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit { //TODO fetch  post up vote e down vote
+export class UserProfileComponent implements OnInit {
 
   user?: IUser;
   loggedUser?: UserAuthRes;
@@ -80,7 +81,13 @@ export class UserProfileComponent implements OnInit { //TODO fetch  post up vote
   }
 
   getAllRoles(): void {
-    this.userServ.getAllRoles().subscribe(res => this.roles = res)
+    this.userServ.getAllRoles().subscribe( res =>{
+      let index : number = res.findIndex(r => r.roleType == RoleType.ROLE_DEV)
+
+      res.splice(index, 1)
+
+      this.roles = res
+    })
   }
 
   getSelectedRoles(): void {

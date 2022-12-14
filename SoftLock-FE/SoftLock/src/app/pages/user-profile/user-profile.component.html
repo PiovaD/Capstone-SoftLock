@@ -26,8 +26,10 @@
       <div *ngIf="isAdmin()">
         <button pButton icon="pi pi-pencil" class="p-button-secondary p-button-outlined" iconPos="right"
           (click)="saveRoles()"></button>
+
         <p-multiSelect defaultLabel="Roles" [options]="roles" [(ngModel)]="selectedRoles" [filter]="false"
           optionLabel="roleType" [displaySelectedLabel]="false" [showHeader]="false"></p-multiSelect>
+
       </div>
 
 
